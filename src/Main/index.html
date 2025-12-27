@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DECKER | Premium Composite Decking & Outdoor Living</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="top-bar">
+      <div class="container">
+        <div class="top-info">
+          <span><i class="fas fa-phone-alt"></i> +90 326 345 40 60</span>
+          <span><i class="fas fa-envelope"></i> info@deck-er.com</span>
+        </div>
+        <div class="top-social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <header id="main-header">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="index.html" class="logo">
+            <img
+              src="../../assets/images/logo.png"
+              alt="DECKER"
+              onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';"
+            />
+            <span id="text-logo" style="display: none"
+              >DECK-<span style="color: var(--accent-color)">ER</span></span
+            >
+          </a>
+
+          <nav>
+            <ul class="nav-links">
+              <li><a href="#products">Products</a></li>
+              <li><a href="#">Inspiration</a></li>
+              <li><a href="../About/index.html">About Us</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+
+          <div class="nav-actions">
+            <a href="#" class="btn-small">Get a Quote</a>
+            <div class="lang-switch">
+              <a href="#" class="active">EN</a><span>|</span><a href="#">TR</a>
+            </div>
+            <div class="mobile-toggle">
+              <i class="fas fa-bars"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="hero-slider">
+      <div class="slide active">
+        <video
+          class="slide-bg"
+          autoplay
+          muted
+          loop
+          playsinline
+          poster="https://images.unsplash.com/photo-1591825729269-caeb344f6df2"
+        >
+          <source src="../../assets/videos/hero-video.mp4" type="video/mp4" />
+        </video>
+        <div class="slide-overlay"></div>
+        <div class="hero-content">
+          <span class="hero-subtitle"
+            >Leading Manufacturer of Composite Solutions</span
+          >
+          <h1>Engineered for Endurance,<br />Designed for Beauty</h1>
+          <p>
+            High-quality WPC composite deck boards, wall panels, and pergola
+            systems. Durable, weather-resistant solutions for your outdoor
+            spaces.
+          </p>
+          <div class="btn-group">
+            <button class="btn btn-primary">Estimate Cost</button>
+            <button class="btn btn-white">Free Sample</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="slide">
+        <img
+          src="https://images.unsplash.com/photo-1621255502120-7f4115b02661?auto=format&fit=crop&w=1920&q=80"
+          alt="Decking Lifestyle"
+          class="slide-bg"
+        />
+        <div class="slide-overlay"></div>
+        <div class="hero-content">
+          <span class="hero-subtitle">Transform Your Space</span>
+          <h1>Create Your Personal Sanctuary</h1>
+          <p>
+            Sustainable wood-alternative solutions that look good and do good.
+          </p>
+          <div class="btn-group">
+            <button class="btn btn-primary">Get Inspired</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="slider-nav">
+        <button class="nav-btn" id="prevBtn">
+          <i class="fas fa-arrow-left"></i>
+        </button>
+        <div class="slider-indicators">
+          <span class="dot active"></span>
+          <span class="dot"></span>
+        </div>
+        <button class="nav-btn" id="nextBtn">
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </section>
+
+    <section class="info-strip">
+      <div class="container">
+        <div class="info-grid">
+          <div class="info-box reveal">
+            <i class="fas fa-calculator info-icon"></i>
+            <div>
+              <h3>Estimate Cost</h3>
+              <p>Get a quick cost estimation.</p>
+            </div>
+          </div>
+          <div class="info-box reveal">
+            <i class="fas fa-box-open info-icon"></i>
+            <div>
+              <h3>Free Samples</h3>
+              <p>Order samples to feel the quality.</p>
+            </div>
+          </div>
+          <div class="info-box reveal">
+            <i class="fas fa-lightbulb info-icon"></i>
+            <div>
+              <h3>Get Inspired</h3>
+              <p>Browse our gallery of projects.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="section-padding bg-light">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="sub-heading">Our Products</span>
+          <h2>Comprehensive WPC Solutions</h2>
+          <p>
+            Explore our wide range of innovative composite products defined in
+            our catalog.
+          </p>
+        </div>
+
+        <div class="product-grid">
+          <div class="product-card reveal">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80"
+                alt="WPC Decking Boards"
+              />
+              <div class="card-overlay">
+                <a href="#" class="btn-link">View Details</a>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>WPC Decking Boards</h3>
+              <p>Durable and aesthetic flooring for terraces and gardens.</p>
+            </div>
+          </div>
+
+          <div class="product-card reveal">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80"
+                alt="WPC Wall Panels"
+              />
+              <div class="card-overlay">
+                <a href="#" class="btn-link">View Details</a>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>WPC Wall Panels</h3>
+              <p>Interior and exterior cladding solutions.</p>
+            </div>
+          </div>
+
+          <div class="product-card reveal">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1594040226829-7f251ab46d80?auto=format&fit=crop&w=800&q=80"
+                alt="WPC Baffle Ceiling"
+              />
+              <div class="card-overlay">
+                <a href="#" class="btn-link">View Details</a>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>WPC Baffle Ceiling</h3>
+              <p>Modern ceiling profiles for architectural depth.</p>
+            </div>
+          </div>
+
+          <div class="product-card reveal">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1599690925058-943dd6a57500?auto=format&fit=crop&w=800&q=80"
+                alt="WPC Fence"
+              />
+              <div class="card-overlay">
+                <a href="#" class="btn-link">View Details</a>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>WPC Fence</h3>
+              <p>Privacy and security with a natural wood look.</p>
+            </div>
+          </div>
+
+          <div class="product-card reveal">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1520697830682-bbb6e85e2b0b?auto=format&fit=crop&w=800&q=80"
+                alt="WPC Pergola"
+              />
+              <div class="card-overlay">
+                <a href="#" class="btn-link">View Details</a>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>WPC Pergola</h3>
+              <p>Stylish shading systems for your outdoors.</p>
+            </div>
+          </div>
+
+          <div class="product-card reveal">
+            <div class="product-img">
+              <img
+                src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80"
+                alt="WPC Prefabricated"
+              />
+              <div class="card-overlay">
+                <a href="#" class="btn-link">View Details</a>
+              </div>
+            </div>
+            <div class="product-info">
+              <h3>WPC Prefabricated</h3>
+              <p>Ready-to-assemble structures and cladding.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="video-showcase section-padding">
+      <div class="container">
+        <div class="video-content reveal">
+          <span class="sub-heading">Watch Us In Action</span>
+          <h2>Experience Decker Quality</h2>
+          <p>
+            Discover how we transform raw materials into premium living spaces.
+          </p>
+
+          <div class="video-wrapper-box">
+            <iframe
+              width="560"
+              height="315"
+              src="https://www.youtube.com/embed/7oTk2O36g7Q"
+              title="YouTube video player"
+              frameborder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowfullscreen
+            >
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="discover-section">
+      <div class="discover-img reveal"></div>
+      <div class="discover-content reveal">
+        <span class="sub-heading">Discover Decker Brand</span>
+        <h2>Nature Meets Technology</h2>
+        <p>
+          Our WPC products offer the warmth of wood with the durability of
+          modern composites. Resistant to water, insects, and decay, our
+          solutions are designed for longevity and aesthetics.
+        </p>
+
+        <h4 style="margin-top: 20px; color: var(--primary-color)">
+          What's New at Deck-er
+        </h4>
+        <p style="font-size: 0.95rem">
+          Check out our latest Atlas Series featuring 3D deep embossed textures
+          that mimic real timber like never before.
+        </p>
+
+        <a
+          href="../About/index.html"
+          class="btn btn-dark"
+          style="margin-top: 20px"
+          >Read Our Story</a
+        >
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <span class="footer-logo">DECK-<span>ER</span></span>
+            <p>
+              Leading Manufacturer of Composite Decking, Pergola, Wall Panels,
+              Fencing Solutions.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="footer-links">
+            <div class="footer-col">
+              <h4>Products</h4>
+              <ul>
+                <li><a href="#">WPC Decking</a></li>
+                <li><a href="#">WPC Wall Panels</a></li>
+                <li><a href="#">WPC Pergola</a></li>
+                <li><a href="#">WPC Fence</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Resources</h4>
+              <ul>
+                <li><a href="#">Installation</a></li>
+                <li><a href="#">Warranty</a></li>
+                <li><a href="#">Catalog</a></li>
+                <li><a href="#">Maintenance</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>Company</h4>
+              <ul>
+                <li><a href="../About/index.html">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">Careers</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Deck-er Composite Systems. All Rights Reserved.</p>
+          <div class="footer-legal">
+            <a href="#">Hatay, Türkiye</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
