@@ -84,3 +84,52 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+// --- NEWS SLIDER LOGIC ---
+const newsTrack = document.querySelector(".news-track");
+const newsCards = document.querySelectorAll(".news-card");
+const prevNewsBtn = document.querySelector(".prev-news");
+const nextNewsBtn = document.querySelector(".next-news");
+
+if (newsTrack && newsCards.length > 0) {
+  let newsIndex = 0;
+
+  // Ekranda kaç tane kart göründüğünü hesapla
+  function getVisibleCards() {
+    if (window.innerWidth >= 1024) return 3; // Masaüstü
+    if (window.innerWidth >= 768) return 2; // Tablet
+    return 1; // Mobil
+  }
+
+  function updateNewsSlider() {
+    const visibleCards = getVisibleCards();
+    const cardWidth = newsCards[0].offsetWidth; // Bir kartın genişliği
+    const gap = 30; // CSS'deki gap değeri
+    const moveAmount = (cardWidth + gap) * newsIndex;
+
+    newsTrack.style.transform = `translateX(-${moveAmount}px)`;
+  }
+
+  nextNewsBtn.addEventListener("click", () => {
+    const visibleCards = getVisibleCards();
+    // Eğer daha gidilecek kart varsa ilerle, yoksa başa dön
+    if (newsIndex < newsCards.length - visibleCards) {
+      newsIndex++;
+    } else {
+      newsIndex = 0; // Loop back to start
+    }
+    updateNewsSlider();
+  });
+
+  prevNewsBtn.addEventListener("click", () => {
+    const visibleCards = getVisibleCards();
+    if (newsIndex > 0) {
+      newsIndex--;
+    } else {
+      newsIndex = newsCards.length - visibleCards; // Go to end
+    }
+    updateNewsSlider();
+  });
+
+  // Pencere boyutu değişirse slider'ı düzelt
+  window.addEventListener("resize", updateNewsSlider);
+}
