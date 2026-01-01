@@ -66,7 +66,7 @@ ul {
   color: #ccc;
   font-size: 0.75rem; /* Daha kibar font */
   padding: 8px 0;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba#c0392b(255, 255, 255, 0.05);
 }
 .top-bar .container {
   display: flex;
@@ -96,6 +96,27 @@ header {
   transition: var(--transition);
   background: rgba(255, 255, 255, 0.98); /* Daha opak */
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}header {
+  /* Change from fixed to sticky */
+  position: -webkit-sticky; /* For Safari */
+  position: sticky !important;
+  
+  /* Stick to the very top edge */
+  top: 0 !important;
+  
+  /* Ensure it sits on top of other content */
+  z-index: 1000;
+  
+  /* Add shadow permanently since it won't toggle with JS anymore */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+  background: rgba(255, 255, 255, 0.98);
+}
+
+/* 2. Reset the content margins */
+/* Since 'sticky' takes up physical space, we don't need negative margins anymore */
+.page-header, 
+.hero-slider {
+  margin-top: 0 !important;
 }
 header.scrolled {
   top: 0;
@@ -176,6 +197,16 @@ header.scrolled {
 }
 
 /* --- HERO SLIDER --- */
+.hero-content h1 {
+  font-size: 3.5rem;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.5s forwards;
+  
+  /* ADD THIS LINE */
+  color: var(--accent-color); 
+}
 .hero-slider {
   position: relative;
   height: 100vh;

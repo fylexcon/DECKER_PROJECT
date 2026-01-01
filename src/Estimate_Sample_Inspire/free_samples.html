@@ -28,7 +28,9 @@
 
       .page-header {
         margin-top: 80px;
-        background-image: url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80");
+        background-image: 
+                          linear-gradient(rgba(23, 32, 42, 0.7), rgba(23, 32, 42, 0.7)),  
+                          url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1920&q=80");
         background-size: cover;
         background-position: center;
         height: 300px;
@@ -43,6 +45,7 @@
       .page-header h1 {
         font-size: 3rem;
         margin-bottom: 10px;
+        color: #ffffff; /* UPDATED: Forces text to be white */
       }
 
       /* Layout Grid */
@@ -71,7 +74,7 @@
 
       .sample-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
       }
 
       .sample-card img {
@@ -358,7 +361,11 @@
       <div class="container">
         <div class="footer-top">
           <div class="footer-brand">
-            <span class="footer-logo" style="font-size: 1.5rem; font-weight: 800; color: white;">DECK-<span style="color: #c0392b;">ER</span></span>
+            <img
+              src="../../assets/images/logo.png"
+              alt="DECKER"
+              onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';"
+            />
             <p style="color: #999; margin-top: 10px;">Leading Manufacturer of Composite Solutions.</p>
           </div>
         </div>
