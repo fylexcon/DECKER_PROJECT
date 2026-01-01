@@ -21,15 +21,15 @@
     <style>
       /* --- Page Specific Styles --- */
       :root {
-        --primary-color: #c0392b; /* Red */
-        --accent-color: #2c3e50;  /* Dark Blue/Grey */
+        --primary-color: #17202a; 
+        --accent-color: #c0392b; 
         --white: #ffffff;
       }
 
       /* --- UPDATED: Red Social Icons --- */
       .top-social a {
-          color: var(--primary-color) !important; /* Force Red */
-          margin-left: 10px;
+          color: var(--primary-color) !important;
+          margin-left: 15px;
           transition: 0.3s;
       }
       .top-social a:hover {
@@ -43,7 +43,7 @@
         top: 0 !important;
         z-index: 1000;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
-        background: rgba(255, 255, 255, 0.98);
+        background: rgb(255, 255, 255, 0.98);
       }
 
       .page-header {
@@ -62,7 +62,7 @@
 
       .page-header h1 {
         font-size: 3rem;
-        margin-bottom: 10px;
+        margin-bottom: 15px;
         color: var(--white);
       }
 
@@ -291,22 +291,34 @@
       <div class="container">
         <div class="nav-wrapper">
           <a href="../Main/index.html" class="logo">
-            <img src="../../assets/images/logo.png" alt="DECKER" onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';" />
-            <span id="text-logo" style="display: none">DECK-<span style="color: var(--primary-color)">ER</span></span>
+            <img
+              src="../../assets/images/logo.png"
+              alt="DECKER"
+              onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';"
+            />
+            <span id="text-logo" style="display: none"
+              >DECK-<span style="color: var(--accent-color, #d2a373)">ER</span></span
+            >
           </a>
 
           <nav>
             <ul class="nav-links">
-              <li><a href="../Main/index.html#products">Products</a></li>
-              <li><a href="get_inspired.html">Inspiration</a></li>
-              <li><a href="../About/index.html">About Us</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="#products">PRODUCTS</a></li>
+              <li><a href="#">RESOURCE</a></li>
+              <li><a href="../About/index.html">ABOUT DECKER</a></li>
+              <li><a href="#">CONTACT US</a></li>
+              <li><a href="#">FAQ</a></li>
             </ul>
           </nav>
 
           <div class="nav-actions">
-            <a href="estimate_cost.html" class="btn-small" style="border-radius: 8px;">Get a Quote</a>
-            <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
+            <a href="estimate_cost.html" class="btn-small">Get a Quote</a>
+            <div class="lang-switch">
+              <a href="#" class="active">EN</a><span>|</span><a href="#">TR</a>
+            </div>
+            <div class="mobile-toggle">
+              <i class="fas fa-bars"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -326,13 +338,104 @@
           
           <div class="products-area">
             <div class="section-header" style="text-align: left; margin-bottom: 30px;">
-              <span class="sub-heading" style="color: var(--primary-color); font-weight: bold; text-transform: uppercase;">Step 1: Dimensions</span>
-              <h2 style="color: var(--accent-color);">Project Details</h2>
+              <span class="sub-heading" style="color: var(--accent-color); font-weight: bold; text-transform: uppercase;">Step 1: Dimensions</span>
+              <h2 style="color: var(--primary-color);">Project Details</h2>
               <p style="color: #666;">Please enter the Length and Width (in feet) for your project.</p>
             </div>
             
             <div class="estimator-grid" id="productGrid">
-              </div>
+
+                <div class="est-card">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400" class="est-img" alt="Classic Decking">
+                    <div class="est-details">
+                        <h3>Classic Decking</h3>
+                        <div class="est-desc">Traditional wood look.</div>
+                        <div class="est-input-group">
+                            <div class="input-row">
+                                <input type="number" min="0" placeholder="L (ft)" class="est-input" id="len-1">
+                                <input type="number" min="0" placeholder="W (ft)" class="est-input" id="wid-1">
+                            </div>
+                            <button class="btn-add" onclick="addToQuote(1, 'Classic Decking')">Add Dimensions</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="est-card">
+                    <img src="https://images.unsplash.com/photo-1621255502120-7f4115b02661?w=400" class="est-img" alt="3D Embossed">
+                    <div class="est-details">
+                        <h3>3D Embossed</h3>
+                        <div class="est-desc">Realistic grain texture.</div>
+                        <div class="est-input-group">
+                            <div class="input-row">
+                                <input type="number" min="0" placeholder="L (ft)" class="est-input" id="len-2">
+                                <input type="number" min="0" placeholder="W (ft)" class="est-input" id="wid-2">
+                            </div>
+                            <button class="btn-add" onclick="addToQuote(2, '3D Embossed')">Add Dimensions</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="est-card">
+                    <img src="https://images.unsplash.com/photo-1591825729269-caeb344f6df2?w=400" class="est-img" alt="Co-Extrusion">
+                    <div class="est-details">
+                        <h3>Co-Extrusion</h3>
+                        <div class="est-desc">Maximum stain protection.</div>
+                        <div class="est-input-group">
+                            <div class="input-row">
+                                <input type="number" min="0" placeholder="L (ft)" class="est-input" id="len-3">
+                                <input type="number" min="0" placeholder="W (ft)" class="est-input" id="wid-3">
+                            </div>
+                            <button class="btn-add" onclick="addToQuote(3, 'Co-Extrusion')">Add Dimensions</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="est-card">
+                    <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400" class="est-img" alt="Fluted Wall Panel">
+                    <div class="est-details">
+                        <h3>Fluted Wall Panel</h3>
+                        <div class="est-desc">Modern vertical slats.</div>
+                        <div class="est-input-group">
+                            <div class="input-row">
+                                <input type="number" min="0" placeholder="L (ft)" class="est-input" id="len-4">
+                                <input type="number" min="0" placeholder="W (ft)" class="est-input" id="wid-4">
+                            </div>
+                            <button class="btn-add" onclick="addToQuote(4, 'Fluted Wall Panel')">Add Dimensions</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="est-card">
+                    <img src="https://images.unsplash.com/photo-1594040226829-7f251ab46d80?w=400" class="est-img" alt="Exterior Cladding">
+                    <div class="est-details">
+                        <h3>Exterior Cladding</h3>
+                        <div class="est-desc">Smooth finish siding.</div>
+                        <div class="est-input-group">
+                            <div class="input-row">
+                                <input type="number" min="0" placeholder="L (ft)" class="est-input" id="len-5">
+                                <input type="number" min="0" placeholder="W (ft)" class="est-input" id="wid-5">
+                            </div>
+                            <button class="btn-add" onclick="addToQuote(5, 'Exterior Cladding')">Add Dimensions</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="est-card">
+                    <img src="https://images.unsplash.com/photo-1599690925058-943dd6a57500?w=400" class="est-img" alt="Composite Fence">
+                    <div class="est-details">
+                        <h3>Composite Fence</h3>
+                        <div class="est-desc">Privacy fencing.</div>
+                        <div class="est-input-group">
+                            <div class="input-row">
+                                <input type="number" min="0" placeholder="L (ft)" class="est-input" id="len-6">
+                                <input type="number" min="0" placeholder="W (ft)" class="est-input" id="wid-6">
+                            </div>
+                            <button class="btn-add" onclick="addToQuote(6, 'Composite Fence')">Add Dimensions</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
           </div>
 
           <div class="summary-area">
@@ -386,57 +489,78 @@
     </section>
 
     <footer>
-      <div class="container" style="text-align: center; color: #666; font-size: 0.8rem;">
-        <p>&copy; 2025 Deck-er Composite Systems. All Rights Reserved.</p>
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <img
+              src="../../assets/images/logo.png"
+              alt="DECKER"
+              size="50px" 
+              onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';"
+            />
+            <p>
+              Leading Manufacturer of Composite Decking, Pergola, Wall Panels,
+              Fencing Solutions.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="footer-links">
+            <div class="footer-col">
+              <h4>PRODUCTS</h4>
+              <ul>
+                <li><a href="#">WPC Decking</a></li>
+                <li><a href="#">WPC Wall Panels</a></li>
+                <li><a href="#">WPC Pergola</a></li>
+                <li><a href="#">WPC Fence</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>RESOURCE</h4>
+              <ul>
+                <li><a href="#">Installation</a></li>
+                <li><a href="#">Warranty</a></li>
+                <li><a href="#">Catalog</a></li>
+                <li><a href="#">Maintenance</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>COMPANY</h4>
+              <ul>
+                <li><a href="../About/index.html">ABOUT DECKER</a></li>
+                <li><a href="#">CONTACT US</a></li>
+                <li><a href="#">FAQ</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Deck-er Composite Systems. All Rights Reserved.</p>
+          <div class="footer-legal">
+            <a href="#">Hatay, Türkiye</a>
+          </div>
+        </div>
       </div>
     </footer>
 
     <script>
-      // --- DATA ---
-      const products = [
-        { id: 1, name: "Classic Decking", img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=400", desc: "Traditional wood look." },
-        { id: 2, name: "3D Embossed", img: "https://images.unsplash.com/photo-1621255502120-7f4115b02661?w=400", desc: "Realistic grain texture." },
-        { id: 3, name: "Co-Extrusion", img: "https://images.unsplash.com/photo-1591825729269-caeb344f6df2?w=400", desc: "Maximum stain protection." },
-        { id: 4, name: "Fluted Wall Panel", img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=400", desc: "Modern vertical slats." },
-        { id: 5, name: "Exterior Cladding", img: "https://images.unsplash.com/photo-1594040226829-7f251ab46d80?w=400", desc: "Smooth finish siding." },
-        { id: 6, name: "Composite Fence", img: "https://images.unsplash.com/photo-1599690925058-943dd6a57500?w=400", desc: "Privacy fencing." }
-      ];
-
       // --- STATE ---
       let cart = [];
 
-      // --- RENDER PRODUCTS ---
-      const grid = document.getElementById('productGrid');
-      
-      products.forEach(prod => {
-        const card = document.createElement('div');
-        card.className = 'est-card'; 
-        card.innerHTML = `
-          <img src="${prod.img}" class="est-img" alt="${prod.name}">
-          <div class="est-details">
-            <h3>${prod.name}</h3>
-            <div class="est-desc">${prod.desc}</div>
-            
-            <div class="est-input-group">
-              <div class="input-row">
-                <input type="number" min="0" placeholder="L (ft)" class="est-input" id="len-${prod.id}">
-                <input type="number" min="0" placeholder="W (ft)" class="est-input" id="wid-${prod.id}">
-              </div>
-              <button class="btn-add" onclick="addToQuote(${prod.id})">Add Dimensions</button>
-            </div>
-          </div>
-        `;
-        grid.appendChild(card);
-      });
-
       // --- FUNCTIONS ---
-      function addToQuote(id) {
+      
+      // DEĞİŞİKLİK: Artık ürün ismini (productName) parametre olarak alıyoruz.
+      // Çünkü JS tarafında 'products' dizisi artık yok.
+      function addToQuote(id, productName) {
+        // İlgili ürünün inputlarını ID'sine göre bul
         const lenInput = document.getElementById(`len-${id}`);
         const widInput = document.getElementById(`wid-${id}`);
         
         const length = parseFloat(lenInput.value);
         const width = parseFloat(widInput.value);
-        const product = products.find(p => p.id === id);
 
         if (!length || !width || length <= 0 || width <= 0) {
           alert("Please enter valid Length and Width in feet.");
@@ -446,16 +570,19 @@
         const area = length * width;
 
         cart.push({
-          id: Date.now(),
-          prodId: product.id,
-          name: product.name,
+          id: Date.now(), // Sepet öğesi için benzersiz ID
+          prodId: id,
+          name: productName, // Parametre olarak gelen isim
           length: length,
           width: width,
           area: area
         });
 
+        // Inputları temizle
         lenInput.value = "";
         widInput.value = "";
+        
+        // Sepeti güncelle
         renderCart();
       }
 
@@ -503,6 +630,8 @@
           alert("Please add products to your list first.");
           return;
         }
+        // Burada veriyi PHP'ye göndermek için AJAX kullanabilirsin ileride
+        console.log("Cart Data:", cart);
         alert("Your request has been received! We will email you a pricing proposal shortly.");
       });
 

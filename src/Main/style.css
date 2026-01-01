@@ -204,8 +204,7 @@ header.scrolled {
   opacity: 0;
   animation: fadeUp 0.8s ease 0.5s forwards;
   
-  /* ADD THIS LINE */
-  color: var(--accent-color); 
+  color: var(--white); 
 }
 .hero-slider {
   position: relative;
