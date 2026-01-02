@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Get Inspired | DECKER</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Open+Sans:wght@300;400;600&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    
+    <link rel="stylesheet" href="../Main/style.css" />
+
+    <style>
+      /* --- Page Specific Styles --- */
+      
+      :root {
+        --primary-color: #17202a;
+        --accent-color: #c0392b;
+        --white: #ffffff;
+      }
+
+      /* Sticky Header Fix */
+      header {
+        position: -webkit-sticky;
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1000;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+        background: rgba(255, 255, 255, 0.98);
+      }
+
+      /* Hero Section */
+      .page-header {
+        background-image: linear-gradient(rgba(23, 32, 42, 0.6), rgba(23, 32, 42, 0.6)), 
+                          url("https://images.unsplash.com/photo-1631641551473-f303d1c97a7a?auto=format&fit=crop&w=1920&q=80");
+        background-size: cover;
+        background-position: center;
+        height: 350px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--white);
+        text-align: center;
+      }
+
+      .page-header h1 {
+        font-size: 3rem;
+        margin-bottom: 10px;
+        color: var(--white);
+        text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+      }
+      
+      .page-header p {
+        font-size: 1.1rem;
+        max-width: 600px;
+        color: #ddd;
+      }
+
+      /* --- GALLERY STYLES --- */
+      
+      /* Masonry-style Column Layout (Pinterest Style) */
+      .gallery-container {
+        column-count: 3;
+        column-gap: 20px;
+        margin-bottom: 40px;
+      }
+
+      .gallery-item {
+        break-inside: avoid; /* Prevents image from being cut between columns */
+        margin-bottom: 20px;
+        border-radius: 8px;
+        overflow: hidden;
+        position: relative;
+        cursor: pointer;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        transition: transform 0.3s ease;
+        opacity: 0; /* Hidden initially for animation */
+        animation: fadeIn 0.5s forwards;
+      }
+
+      .gallery-item:hover {
+        transform: scale(1.02);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+      }
+
+      .gallery-item img {
+        width: 100%;
+        height: auto; /* Maintains natural aspect ratio */
+        display: block;
+      }
+
+      /* Hover Overlay (Optional - Remove if you want pure image) */
+      .gallery-overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(23, 32, 42, 0.2);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .gallery-item:hover .gallery-overlay {
+        opacity: 1;
+      }
+
+      /* --- LOAD MORE BUTTON --- */
+      .load-more-container {
+        text-align: center;
+        margin-top: 40px;
+        padding-bottom: 40px;
+      }
+
+      .btn-load-more {
+        background: transparent;
+        border: 2px solid var(--accent-color);
+        color: var(--accent-color);
+        padding: 12px 40px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+      }
+
+      .btn-load-more:hover {
+        background: var(--accent-color);
+        color: var(--white);
+      }
+
+      @keyframes fadeIn {
+        to { opacity: 1; }
+      }
+
+      /* Mobile Responsive */
+      @media (max-width: 992px) {
+        .gallery-container { column-count: 2; }
+      }
+      @media (max-width: 600px) {
+        .gallery-container { column-count: 1; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="top-bar">
+      <div class="container">
+        <div class="top-info">
+          <span><i class="fas fa-phone-alt"></i> +90 326 345 40 60</span>
+          <span><i class="fas fa-envelope"></i> info@deck-er.com</span>
+        </div>
+        <div class="top-social">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin-in"></i></a>
+          <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <header id="main-header">
+      <div class="container">
+        <div class="nav-wrapper">
+          <a href="../Main/index.html" class="logo">
+            <img
+              src="../../assets/images/logos/logo.png"
+              alt="DECKER"
+              onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';"
+            />
+
+          <nav>
+            <ul class="nav-links">
+              <li><a href="../Main/index.html#products">Products</a></li>
+              <li><a href="get_inspired.html" style="color: var(--accent-color);">Inspiration</a></li>
+              <li><a href="../About/index.html">About Us</a></li>
+              <li><a href="#">Contact</a></li>
+            </ul>
+          </nav>
+
+          <div class="nav-actions">
+            <a href="estimate_cost.html" class="btn-small">Get a Quote</a>
+            <div class="lang-switch">
+              <a href="#" class="active">EN</a><span>|</span><a href="#">TR</a>
+            </div>
+            <div class="mobile-toggle">
+              <i class="fas fa-bars"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="page-header">
+      <div class="container">
+        <h1>Get Inspired</h1>
+        <p>Explore our diverse range of composite solutions applied in real-world projects.</p>
+      </div>
+    </section>
+
+    <section class="section-padding" style="background-color: #f4f6f7; padding: 60px 0;">
+      <div class="container">
+        
+        <div class="gallery-container" id="galleryGrid"></div>
+
+        <div class="load-more-container">
+          <button id="loadMoreBtn" class="btn-load-more">Load More Photos</button>
+        </div>
+
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <img
+              src="../../assets/images/logo.png"
+              alt="DECKER"
+              style="width: 150px;" 
+              onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';"
+            />
+            <p>
+              Leading Manufacturer of Composite Decking, Pergola, Wall Panels,
+              Fencing Solutions.
+            </p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook-f"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+          </div>
+          <div class="footer-links">
+            <div class="footer-col">
+              <h4>PRODUCTS</h4>
+              <ul>
+                <li><a href="#">WPC Decking</a></li>
+                <li><a href="#">WPC Wall Panels</a></li>
+                <li><a href="#">WPC Pergola</a></li>
+                <li><a href="#">WPC Fence</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>RESOURCE</h4>
+              <ul>
+                <li><a href="#">Installation</a></li>
+                <li><a href="#">Warranty</a></li>
+                <li><a href="#">Catalog</a></li>
+                <li><a href="#">Maintenance</a></li>
+              </ul>
+            </div>
+            <div class="footer-col">
+              <h4>COMPANY</h4>
+              <ul>
+                <li><a href="../About/index.html">ABOUT DECKER</a></li>
+                <li><a href="#">CONTACT US</a></li>
+                <li><a href="#">FAQ</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <p>&copy; 2025 Deck-er Composite Systems. All Rights Reserved.</p>
+          <div class="footer-legal">
+            <a href="#">Hatay, Türkiye</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      // 1. CONFIGURATION
+      const imagePath = "../../assets/images/get_inspired/";
+      const itemsPerPage = 6; // How many images to load per click
+      
+      // 2. YOUR IMAGE LIST
+      // Simply list all your filenames here. No need to write HTML for each one.
+      const imageList = [
+        "2.jpg",
+        "3.png",
+        "4.jpeg",
+        "5.jpg",
+        "6.png",
+        "7.jpeg",
+        "8.jpg",
+        "9.png",
+        "10.jpeg",
+        "11.jpg",
+        "12.png",
+        "13.jpeg",
+        "14.jpg",
+        "15.png",
+        "16.jpeg",
+        "17.jpg",
+        "18.png",
+        "19.jpeg",
+        "20.jpg",
+        "21.jpeg",
+        "22.jpg",
+        "23.jpeg",
+        "24.jpg",
+        "25.jpeg",
+        "26.jpg",
+        "27.jpeg",
+        "28.jpg",
+        "29.jpeg",
+        "30.jpg",
+        "31.jpeg",
+        "32.jpg",
+        "33.jpg",
+        "34.jpg",
+        "35.jpg",
+        "36.jpg",
+        "37.jpg",
+        "38.jpg",
+        "39.jpg",
+        "40.jpeg",
+        "41.jpg",
+        "42.jpg",
+        "43.jpg",
+        "44.jpg",
+        "45.jpg",
+        "46.jpg",
+      ];
+
+      // 3. LOGIC
+      let currentIndex = 0;
+      const galleryGrid = document.getElementById('galleryGrid');
+      const loadMoreBtn = document.getElementById('loadMoreBtn');
+
+      function loadImages() {
+        const maxIndex = Math.min(currentIndex + itemsPerPage, imageList.length);
+        
+        for (let i = currentIndex; i < maxIndex; i++) {
+          const filename = imageList[i];
+          
+          // Create the HTML elements
+          const itemDiv = document.createElement('div');
+          itemDiv.className = 'gallery-item';
+          
+          itemDiv.innerHTML = `
+            <img src="${imagePath}${filename}" alt="Project Inspiration" loading="lazy">
+            <div class="gallery-overlay"></div>
+          `;
+          
+          galleryGrid.appendChild(itemDiv);
+        }
+
+        currentIndex = maxIndex;
+
+        // Hide button if we reached the end
+        if (currentIndex >= imageList.length) {
+          loadMoreBtn.style.display = 'none';
+        }
+      }
+
+      // Initial Load
+      if (imageList.length > 0) {
+        loadImages();
+      } else {
+        loadMoreBtn.style.display = 'none';
+      }
+
+      // Button Click Event
+      loadMoreBtn.addEventListener('click', loadImages);
+
+    </script>
+  </body>
+</html>

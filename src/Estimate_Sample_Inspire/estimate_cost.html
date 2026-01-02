@@ -93,7 +93,7 @@
 
       .est-card:hover {
         transform: translateY(-5px);
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        box-shadow: var(--accent-color)33 0px 8px 16px;
       }
 
       .est-img {
@@ -109,7 +109,7 @@
       .est-details h3 {
         font-size: 1.1rem;
         margin-bottom: 5px;
-        color: var(--primary-color);
+        color: var(--accent-color);
       }
 
       .est-desc {
@@ -144,7 +144,7 @@
 
       .btn-add {
         width: 100%;
-        background: var(--primary-color);
+        background: var(--accent-color);
         color: white;
         border: none;
         padding: 10px;
@@ -165,7 +165,7 @@
         background: var(--white);
         padding: 30px;
         box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-        border-top: 4px solid var(--primary-color);
+        border-top: 4px solid var(--accent-color);
         position: sticky;
         top: 100px;
         border-radius: 12px; /* Rounded Sidebar */
@@ -292,14 +292,10 @@
         <div class="nav-wrapper">
           <a href="../Main/index.html" class="logo">
             <img
-              src="../../assets/images/logo.png"
+              src="../../assets/images/logos/logo.png"
               alt="DECKER"
               onerror="this.style.display='none'; document.getElementById('text-logo').style.display='block';"
             />
-            <span id="text-logo" style="display: none"
-              >DECK-<span style="color: var(--accent-color, #d2a373)">ER</span></span
-            >
-          </a>
 
           <nav>
             <ul class="nav-links">
