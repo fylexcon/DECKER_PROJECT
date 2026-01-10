@@ -1,0 +1,898 @@
+/* =========================================
+   1. DEĞİŞKENLER & TEMEL AYARLAR
+   ========================================= */
+:root {
+  /* --- Renk Paleti --- */
+  --primary-color: #17202a;
+  /* Koyu Antrasit */
+  --accent-color: #c0392b;
+  /* Kiremit Kırmızısı */
+  --text-color: #34495e;
+  /* Metin Rengi */
+  --bg-light: #f4f6f7;
+  /* Açık Gri Zemin */
+  --white: #ffffff;
+  --dark: #000000;
+
+  /* --- Fontlar --- */
+  --font-heading: "Montserrat", sans-serif;
+  --font-body: "Open Sans", sans-serif;
+
+  /* --- Efektler --- */
+  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  --radius: 4px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-color);
+  line-height: 1.6;
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-heading);
+  color: var(--primary-color);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition);
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* =========================================
+   2. TOP BAR (EN ÜST ŞERİT)
+   ========================================= */
+.top-bar {
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-size: 0.8rem;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.top-bar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.top-info span {
+  margin-right: 25px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.top-info i {
+  color: var(--accent-color);
+  margin-right: 8px;
+  font-size: 0.9rem;
+}
+
+.top-social span {
+  margin-right: 10px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.top-social a {
+  margin-left: 15px;
+  color: rgba(255, 255, 255, 0.8);
+  transition: var(--transition);
+}
+
+.top-social a:hover {
+  color: var(--accent-color);
+}
+
+/* =========================================
+   3. HEADER & NAVIGATION (FİNAL DÜZELTME)
+   ========================================= */
+header {
+  position: relative;
+  width: 100%;
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  z-index: 100;
+  height: 80px;
+  /* Header yüksekliği */
+}
+
+/* SORUNU ÇÖZEN KOD: Container'ın yüksekliği header'a eşitleniyor */
+header .container {
+  height: 100%;
+}
+
+.nav-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* Dikey ortalama */
+  height: 100%;
+  /* Yüksekliğin tamamını kapla */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  /* Logo da kapsayıcısını doldursun */
+}
+
+.logo img {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  /* Resim oranını koru */
+}
+
+.logo span {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--primary-color);
+  margin-left: 10px;
+  letter-spacing: -1px;
+  line-height: 1;
+  /* Satır yüksekliğini sıfırla ki yukarı kaymasın */
+}
+
+.nav-links {
+  display: flex;
+  gap: 35px;
+  align-items: center;
+  /* Linkleri dikeyde ortala */
+  height: 100%;
+}
+
+.nav-links a {
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: var(--primary-color);
+  letter-spacing: 0.5px;
+  position: relative;
+  /* Paddingleri sıfırlayalım, flex zaten ortalıyor */
+  padding: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  /* Hover çizgisi için tam yükseklik */
+}
+
+.nav-links a:hover {
+  color: var(--accent-color);
+}
+
+/* Çizgiyi en alta yapıştırmak için ayar */
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 3px;
+  bottom: 0;
+  left: 0;
+  background-color: var(--accent-color);
+  /* Çizgiyi bottom:0 ile en alta ittik */
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+/* Active Class Tanımı */
+.nav-links a.active {
+  color: var(--accent-color);
+  pointer-events: none; 
+    cursor: default;    
+}
+
+/* Active olunca alt çizgi tam boy görünsün */
+.nav-links a.active::after {
+  width: 100%;
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.btn-small {
+  background: var(--accent-color);
+  color: var(--white);
+  padding: 12px 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  font-size: 0.8rem;
+  letter-spacing: 0.5px;
+  display: inline-flex;
+  /* Flex yaparak yazıyı butonun ortasına çiviler */
+  align-items: center;
+  justify-content: center;
+  line-height: normal;
+  /* Satır yüksekliği sorununu çözer */
+}
+
+.btn-small:hover {
+  background: var(--primary-color);
+  transform: translateY(-2px);
+}
+
+.mobile-toggle {
+  display: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--primary-color);
+}
+
+.language-switch {
+  display: flex;
+  align-items: center;
+  /* Dikey ortalama */
+  gap: 10px;
+  /* EN ve ES arasındaki boşluk */
+  margin-right: 10px;
+  /* Mobil menü ikonuna çok yapışmasın */
+}
+
+.lang-opt {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  /* Varsayılan koyu renk */
+  text-decoration: none;
+  transition: color 0.3s ease;
+  opacity: 0.6;
+  /* Pasif olan hafif silik dursun */
+}
+
+/* Fare üzerine gelince */
+.lang-opt:hover {
+  color: var(--accent-color);
+  opacity: 1;
+}
+
+/* Seçili olan dil (Active Class) */
+.lang-opt.active {
+  color: var(--accent-color);
+  /* Kiremit kırmızısı */
+  opacity: 1;
+  /* Tam görünürlük */
+  cursor: default;
+  /* Tıklanmış hissi vermesin */
+}
+
+/* Araya koyduğumuz çizgi */
+.sep {
+  color: var(--primary-color);
+  opacity: 0.3;
+  font-size: 0.8rem;
+  font-weight: 300;
+}
+
+/* =========================================
+   4. HERO VIDEO SECTION
+   ========================================= */
+.hero-section {
+  position: relative;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+  background: #000;
+}
+
+.hero-video-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 2;
+}
+
+.hero-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  z-index: 3;
+  color: var(--white);
+  width: 90%;
+  max-width: 900px;
+}
+
+.hero-subtitle {
+  display: inline-block;
+  background: var(--accent-color);
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 25px;
+  border-radius: var(--radius);
+}
+
+.hero-content h1 {
+  font-size: 3.8rem;
+  margin-bottom: 20px;
+  color: var(--white);
+  line-height: 1.1;
+  text-shadow: 0 5px 20px rgba(0, 0, 0, 0.6);
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  font-weight: 300;
+  opacity: 0.95;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn-outline-white {
+  border: 2px solid var(--white);
+  color: var(--white);
+  padding: 12px 35px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+  transition: var(--transition);
+}
+
+.btn-outline-white:hover {
+  background: var(--white);
+  color: var(--primary-color);
+}
+
+/* =========================================
+   5. INFO STRIP
+   ========================================= */
+.info-strip {
+  position: relative;
+  z-index: 10;
+  margin-top: -80px;
+  margin-bottom: 80px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: var(--white);
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.info-box {
+  padding: 45px;
+  display: flex;
+  align-items: center;
+  gap: 25px;
+  border-right: 1px solid #eee;
+  transition: var(--transition);
+}
+
+.info-box:last-child {
+  border-right: none;
+}
+
+.info-box:hover {
+  background: #fafafa;
+}
+
+.info-icon {
+  font-size: 2.5rem;
+  color: var(--accent-color);
+}
+
+.info-box h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+  color: var(--primary-color);
+}
+
+.info-box p {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0;
+}
+
+/* =========================================
+   6. PRODUCTS & GENERAL SECTIONS
+   ========================================= */
+.section-padding {
+  padding: 100px 0;
+}
+
+.bg-light {
+  background: var(--bg-light);
+}
+
+.section-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px;
+}
+
+.sub-heading {
+  color: var(--accent-color);
+  font-weight: 700;
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.section-header h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+.product-card {
+  background: var(--white);
+  box-shadow: var(--shadow-sm);
+  border-radius: var(--radius);
+  overflow: hidden;
+  transition: var(--transition);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+}
+
+.product-img {
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+}
+
+.product-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.product-card:hover .product-img img {
+  transform: scale(1.1);
+}
+
+.card-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(23, 32, 42, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: var(--transition);
+}
+
+.product-card:hover .card-overlay {
+  opacity: 1;
+}
+
+.btn-link {
+  color: var(--white);
+  border: 2px solid var(--white);
+  padding: 10px 25px;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.85rem;
+}
+
+.btn-link:hover {
+  background: var(--white);
+  color: var(--primary-color);
+}
+
+.product-info {
+  padding: 25px;
+  text-align: center;
+}
+
+.product-info h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.product-info p {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+/* Animasyon Class'ı */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =========================================
+   7. FOOTER
+   ========================================= */
+footer {
+  background: #1a1a1a;
+  color: #999;
+  padding: 80px 0 30px;
+  margin-top: auto;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 50px;
+  padding-bottom: 50px;
+  border-bottom: 1px solid #333;
+}
+
+.footer-logo {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--white);
+  display: block;
+  margin-bottom: 15px;
+}
+
+.footer-logo span {
+  color: var(--accent-color);
+}
+
+.social-links a {
+  display: inline-flex;
+  width: 40px;
+  height: 40px;
+  background: #333;
+  color: #fff;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  margin-right: 10px;
+  transition: var(--transition);
+}
+
+.social-links a:hover {
+  background: var(--accent-color);
+}
+
+.footer-col h4 {
+  color: var(--white);
+  margin-bottom: 25px;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer-col ul li {
+  margin-bottom: 12px;
+}
+
+.footer-col ul li a:hover {
+  color: var(--accent-color);
+  padding-left: 5px;
+}
+
+.footer-bottom {
+  padding-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+}
+
+/* =========================================
+   8. MOBILE RESPONSIVE
+   ========================================= */
+@media (max-width: 992px) {
+
+  /* Header */
+  .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--white);
+    flex-direction: column;
+    padding: 20px;
+    box-shadow: var(--shadow-md);
+    border-top: 1px solid #eee;
+    z-index: 999;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .mobile-toggle {
+    display: block;
+  }
+
+  /* Hero */
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-section {
+    height: 70vh;
+  }
+
+  /* Info Strip */
+  .info-strip {
+    margin-top: 0;
+    margin-bottom: 40px;
+  }
+
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .info-box {
+    border-right: none;
+    border-bottom: 1px solid #eee;
+    padding: 30px;
+  }
+
+  /* Footer */
+  .footer-top {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 15px;
+  }
+}
+
+/* =========================================
+   WHAT'S NEW CAROUSEL (3'LÜ GÖRÜNÜM & BÜYÜK KARTLAR)
+   ========================================= */
+.news-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 30px 0 60px;
+  /* Üst/Alt boşlukları artırdık */
+  /* Kenarlardaki yumuşak geçiş efekti */
+  mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.news-track {
+  display: flex;
+  gap: 30px;
+  /* Kartlar arası boşluk */
+  width: max-content;
+  /* Kart sayısı ve genişliğine göre animasyon süresini ayarlayabilirsiniz */
+  animation: scroll 35s linear infinite;
+}
+
+/* Mouse ile üzerine gelince dursun */
+.news-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+
+  /* ÖNEMLİ: Duplicate mantığında tam ortadan başa sarması için -50% */
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* --- Haber Kartı Tasarımı --- */
+.news-card {
+  display: flex;
+  background: var(--white);
+
+  /* HESAPLAMA: (Ekran Genişliği / 3) - Boşluk Payı */
+  /* Bu sayede ekrana daima 3 tane sığar */
+  width: calc(33.333vw - 40px);
+  /* Container içine sığdırmak isterseniz 'vw' yerine '100%' kullanabilirsiniz ama 'vw' daha geniş durur */
+  max-width: 600px;
+  /* Çok dev ekranlarda aşırı büyümesin */
+  min-width: 400px;
+  /* Çok küçülmesin */
+
+  height: 240px;
+  /* Yükseklik artırıldı (Eskisi 180px idi) */
+
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+  transition: var(--transition);
+  flex-shrink: 0;
+  border: 1px solid #eee;
+}
+
+.news-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-5px);
+}
+
+/* Kartın Solu: Resim */
+.news-img {
+  width: 45%;
+  /* Resim alanını biraz genişlettik (%40 -> %45) */
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.news-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Resmi kutuya tam doldur */
+  transition: transform 0.6s ease;
+}
+
+.news-card:hover .news-img img {
+  transform: scale(1.1);
+}
+
+/* Kartın Sağı: İçerik */
+.news-content {
+  width: 55%;
+  padding: 25px;
+  /* İç boşluğu artırdık */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* İçeriği dikey ortala */
+}
+
+.news-content .date {
+  font-size: 0.8rem;
+  color: var(--accent-color);
+  /* Tarihi vurgu rengi yaptık */
+  font-weight: 700;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.news-content h3 {
+  font-size: 1.3rem;
+  /* Başlık büyütüldü */
+  margin-bottom: 10px;
+  line-height: 1.2;
+  color: var(--primary-color);
+  font-weight: 800;
+}
+
+.news-content p {
+  font-size: 0.95rem;
+  /* Açıklama yazısı büyütüldü */
+  color: #666;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  /* 3 satıra kadar izin ver */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.5;
+}
+
+.read-more {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-transform: uppercase;
+}
+
+.read-more i {
+  font-size: 0.8rem;
+  color: var(--accent-color);
+  transition: transform 0.3s;
+}
+
+.read-more:hover {
+  color: var(--accent-color);
+}
+
+.read-more:hover i {
+  transform: translateX(5px);
+}
+
+/* --- Mobil Uyumluluk --- */
+@media (max-width: 992px) {
+  .news-card {
+    width: 400px;
+    /* Tablette sabit boyut */
+    height: 220px;
+  }
+}
+
+@media (max-width: 768px) {
+  .news-card {
+    width: 300px;
+    /* Mobilde daha küçük */
+    height: auto;
+    /* Yükseklik serbest */
+    flex-direction: column;
+    /* Mobilde alt alta */
+  }
+
+  .news-img {
+    width: 100%;
+    height: 180px;
+  }
+
+  .news-content {
+    width: 100%;
+    padding: 20px;
+  }
+}

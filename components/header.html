@@ -1,13 +1,17 @@
 <div class="top-bar">
   <div class="container">
     <div class="top-info">
-      <span><i class="fas fa-phone-alt"></i> +90 326 345 40 60</span>
-      <span><i class="fas fa-envelope"></i> info@deck-er.com</span>
+      <a href="tel:+903263454060"
+        ><i class="fas fa-phone-alt"></i> +90 326 345 40 60</a
+      >
+      <a href="mailto:info@deck-er.com"
+        ><i class="fas fa-envelope"></i> info@deck-er.com</a
+      >
     </div>
     <div class="top-social">
-      <a href="#"><i class="fab fa-instagram"></i></a>
-      <a href="#"><i class="fab fa-linkedin-in"></i></a>
-      <a href="#"><i class="fab fa-youtube"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+      <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
     </div>
   </div>
 </div>
@@ -25,27 +29,50 @@
         <span id="text-logo" style="display: none">DECKER</span>
       </a>
 
-      <nav>
+      <nav class="main-nav">
         <ul class="nav-links">
-          <li><a href="index.html#products">PRODUCTS</a></li>
-          <li><a href="#">RESOURCE</a></li>
-
-          <li><a href="pages/about.html">ABOUT DECKER</a></li>
-          <li><a href="pages/contact.html">CONTACT US</a></li>
-          <li><a href="pages/faq.html">FAQ</a></li>
+          <li>
+            <a
+              href="index.html#products"
+              class="nav-link"
+              data-key="menu_products"
+              >PRODUCTS</a
+            >
+          </li>
+          <li>
+            <a href="#" class="nav-link" data-key="menu_resource">RESOURCE</a>
+          </li>
+          <li>
+            <a href="pages/about.html" class="nav-link" data-key="menu_about"
+              >ABOUT US</a
+            >
+          </li>
+          <li>
+            <a
+              href="pages/contact.html"
+              class="nav-link"
+              data-key="menu_contact"
+              >CONTACT</a
+            >
+          </li>
+          <li>
+            <a href="pages/faq.html" class="nav-link" data-key="menu_faq"
+              >FAQ</a
+            >
+          </li>
         </ul>
       </nav>
 
       <div class="nav-actions">
-        <a href="pages/estimate-cost.html" class="btn-small">GET A QUOTE</a>
-
         <div class="lang-switch">
-          <a href="#" class="active">EN</a><span>|</span><a href="#">TR</a>
+          <a href="#" class="lang-btn active" data-lang="en">EN</a>
+          <span class="divider"></span>
+          <a href="#" class="lang-btn" data-lang="es">ESP</a>
         </div>
 
-        <div class="mobile-toggle">
+        <button class="mobile-toggle" aria-label="Toggle menu">
           <i class="fas fa-bars"></i>
-        </div>
+        </button>
       </div>
     </div>
   </div>
