@@ -1,0 +1,166 @@
+/* --- assets/css/faq.css (PREMIUM GLASS VERSION) --- */
+
+/* 1. SAYFA BAŞLIĞI (3D & Parallax) */
+.page-header {
+  background-image: linear-gradient(
+      135deg,
+      rgba(23, 32, 42, 0.85),
+      rgba(192, 57, 43, 0.3)
+    ),
+    url("https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&w=1920&q=80");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; /* Parallax Efekti */
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  margin-bottom: -50px; /* İçeriği başlığın içine hafifçe sokmak için */
+  padding-bottom: 50px;
+}
+
+.page-header h1 {
+  font-size: 3.5rem;
+  text-shadow: 0 10px 30px rgba(250, 250, 250, 0.5);
+  margin-bottom: 10px;
+  letter-spacing: -1px;
+}
+
+.page-header p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  font-weight: 300;
+  max-width: 600px;
+}
+
+/* 2. FAQ KONTEYNER */
+.faq-section {
+  padding-bottom: 100px;
+  /* Arka planı hafif gri yerine görselle uyumlu çok hafif bir ton yapabiliriz veya beyaz bırakabiliriz */
+  background: linear-gradient(to bottom, transparent, #f9f9f9 15%);
+}
+
+.faq-container {
+  max-width: 850px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10; /* Başlığın üzerine çıkması için */
+}
+
+/* 3. "GLASS" SORU KARTI */
+.faq-item {
+  background: rgba(255, 255, 255, 0.8); /* Yarı saydam beyaz */
+  backdrop-filter: blur(12px); /* BUZLU CAM EFEKTİ */
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 16px; /* Daha yuvarlak köşeler */
+  margin-bottom: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05); /* Yumuşak gölge */
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.faq-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--accent-color);
+}
+
+/* 4. SORU BAŞLIĞI */
+.faq-question {
+  padding: 25px 30px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--primary-color);
+  transition: color 0.3s;
+}
+
+/* İkon Alanı */
+.faq-icon-wrapper {
+  width: 32px;
+  height: 32px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.faq-icon {
+  font-size: 0.9rem;
+  color: #555;
+  transition: transform 0.4s ease;
+}
+
+/* 5. AKTİF DURUM (Açıkken) */
+.faq-item.active {
+  background: #fff;
+  box-shadow: 0 20px 40px rgba(192, 57, 43, 0.15); /* Kırmızımsı glow */
+  border: 1px solid var(--accent-color);
+}
+
+.faq-item.active .faq-question {
+  color: var(--accent-color);
+}
+
+.faq-item.active .faq-icon-wrapper {
+  background: var(--accent-color);
+  transform: rotate(180deg);
+}
+
+.faq-item.active .faq-icon {
+  color: #fff;
+  transform: rotate(45deg); /* Artı -> Çarpı */
+}
+
+/* 6. CEVAP ALANI */
+.faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+  background: transparent;
+}
+
+.faq-answer p {
+  padding: 0 30px 30px 30px; /* Yanlardan ve alttan boşluk */
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin: 0;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Cevap açıldığında metnin gelişi */
+.faq-item.active .faq-answer p {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.1s;
+}
+
+/* MOBİL */
+@media (max-width: 768px) {
+  .page-header {
+    height: 300px;
+  }
+  .page-header h1 {
+    font-size: 2.5rem;
+  }
+  .faq-question {
+    padding: 20px;
+    font-size: 1rem;
+  }
+  .faq-answer p {
+    padding: 0 20px 20px 20px;
+  }
+}
