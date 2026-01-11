@@ -9,16 +9,20 @@
   justify-content: center;
   text-align: center;
   position: relative;
-  color: #fff;
+  color: #ffffff;
   margin-top: -80px; /* Pull behind nav */
   padding-top: 80px;
+}
+
+.atlas-hero h1 {
+  color: #ffffff !important;
 }
 
 .atlas-hero::after {
   content: '';
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0,0,0,0.4);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 .atlas-content {
