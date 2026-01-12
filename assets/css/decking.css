@@ -129,29 +129,44 @@
 .decking-colors {
   display: flex;
   gap: 15px;
-  /* Added margin bottom to separate from icons if colors exist */
   margin-bottom: 25px; 
 }
 
 .d-swatch {
-  /* Increased size from 40px to 48px */
-  width: 48px;
-  height: 48px;
-  /* Changed from 50% to 4px for square shape with slightly soft corners */
+  width: 80px;
+  height: 80px;
   border-radius: 4px; 
-  border: 3px solid #eee;
+  border: 2px solid #ddd; /* Slightly subtle border since images have texture */
   cursor: pointer;
   position: relative;
   transition: all 0.3s ease;
+  
+  /* key properties for image backgrounds */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.d-swatch:hover { transform: scale(1.1); border-color: #999; }
-.d-swatch[title]:hover::after {
-  content: attr(title);
-  position: absolute;
-  bottom: 120%; left: 50%; transform: translateX(-50%);
-  background: #333; color: #fff; padding: 4px 8px; font-size: 10px;
-  white-space: nowrap; border-radius: 4px;
+.d-swatch:hover { 
+    transform: scale(1.1); 
+    border-color: var(--accent-color); 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.bg-antrasit { 
+  background-image: url('../images/get_inspired/DECK-RENK-ANTRASIT.jpg'); 
+}
+
+.bg-kahve { 
+  background-image: url('../images/get_inspired/DECK-RENK-KAHVE.jpg'); 
+}
+
+.bg-gri { 
+  background-image: url('../images/get_inspired/DECK-RENK-GRI.jpg'); 
+}
+
+.bg-krem { 
+  background-image: url('../images/get_inspired/DECK-RENK-KREM.jpg'); 
 }
 
 /* Icons Grid */
@@ -173,9 +188,12 @@
   color: #555;
 }
 
-.icon-box i {
-  color: var(--accent-color);
-  font-size: 1.2rem;
+/* Remove the old font-size rule for 'i' and add this for 'img' */
+.icon-box img {
+  width: 28px;  /* Adjusts the icon size */
+  height: 28px;
+  object-fit: contain; /* Ensures the image doesn't stretch */
+  display: block;
 }
 
 /* Colors Data */
