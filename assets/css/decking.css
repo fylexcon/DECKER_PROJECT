@@ -129,15 +129,20 @@
 .decking-colors {
   display: flex;
   gap: 15px;
+  /* Added margin bottom to separate from icons if colors exist */
+  margin-bottom: 25px; 
 }
 
 .d-swatch {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
+  /* Increased size from 40px to 48px */
+  width: 48px;
+  height: 48px;
+  /* Changed from 50% to 4px for square shape with slightly soft corners */
+  border-radius: 4px; 
   border: 3px solid #eee;
   cursor: pointer;
   position: relative;
+  transition: all 0.3s ease;
 }
 
 .d-swatch:hover { transform: scale(1.1); border-color: #999; }
