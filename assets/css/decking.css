@@ -197,6 +197,7 @@
   background: #f9f9f9;
   padding: 20px;
   border-radius: 6px;
+  color: var(--accent-color);
 }
 
 .icon-box {
