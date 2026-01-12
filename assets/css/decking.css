@@ -9,11 +9,12 @@
   justify-content: center;
   text-align: center;
   position: relative;
-  color: #ffffff;
-  margin-top: -80px; /* Pull behind nav */
+  color: #fff;
+  margin-top: -80px; 
   padding-top: 80px;
 }
 
+/* Force H1 white */
 .atlas-hero h1 {
   color: #ffffff !important;
 }
@@ -22,7 +23,7 @@
   content: '';
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0,0,0,0.4);
 }
 
 .atlas-content {
@@ -41,10 +42,10 @@
   margin-bottom: 15px;
 }
 
-/* PRODUCT DISPLAY TABLE (The Layout You Requested) */
+/* PRODUCT DISPLAY TABLE */
 .product-display-table {
   display: grid;
-  grid-template-columns: 100px 1.5fr 1fr; /* Left (Thumbs), Middle (Big), Right (Info) */
+  grid-template-columns: 100px 1.5fr 1fr;
   gap: 30px;
   background: #fff;
   border: 1px solid #eee;
@@ -55,7 +56,7 @@
   align-items: start;
 }
 
-/* 1. LEFT COLUMN: THUMBNAILS */
+/* 1. THUMBNAILS */
 .thumb-col {
   display: flex;
   flex-direction: column;
@@ -78,7 +79,7 @@
   opacity: 1;
 }
 
-/* 2. MIDDLE COLUMN: MAIN IMAGE */
+/* 2. MAIN IMAGE */
 .main-img-col {
   height: 100%;
   min-height: 400px;
@@ -86,25 +87,25 @@
 
 .main-img {
   width: 100%;
-  height: 100%; /* Fills the middle column */
+  height: 100%;
   max-height: 500px;
   object-fit: cover;
   border-radius: 4px;
   transition: opacity 0.3s ease;
 }
 
-/* 3. RIGHT COLUMN: INFO STACK */
+/* 3. INFO STACK */
 .info-col {
   display: flex;
   flex-direction: column;
-  gap: 30px; /* Space between Desc, Colors, Icons */
+  gap: 25px;
   height: 100%;
 }
 
 .product-title {
   font-size: 1.8rem;
   color: var(--primary-color);
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   font-weight: 800;
 }
 
@@ -113,10 +114,10 @@
   line-height: 1.6;
   font-size: 0.95rem;
   border-bottom: 1px solid #eee;
-  padding-bottom: 20px;
+  padding-bottom: 15px;
 }
 
-/* Color Options */
+/* --- NEW COLOR CARD STRUCTURE --- */
 .color-label {
   font-weight: 700;
   color: var(--primary-color);
@@ -128,48 +129,67 @@
 
 .decking-colors {
   display: flex;
-  gap: 15px;
-  margin-bottom: 25px; 
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .d-swatch {
-  width: 80px;
-  height: 80px;
-  border-radius: 4px; 
-  border: 2px solid #ddd; /* Slightly subtle border since images have texture */
+  width: 55px;  /* Increased size slightly to show texture */
+  height: 55px;
+  border-radius: 6px; /* Slight rounding for a premium square look */
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
   cursor: pointer;
-  position: relative;
-  transition: all 0.3s ease;
-  
-  /* key properties for image backgrounds */
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+  transition: transform 0.2s, border-color 0.2s;
 }
 
-.d-swatch:hover { 
-    transform: scale(1.1); 
-    border-color: var(--accent-color); 
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+.color-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
+.color-card:hover .d-swatch {
+  transform: scale(1.1);
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.color-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #555;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Specific Colors */
 .bg-antrasit { 
-  background-image: url('../images/get_inspired/DECK-RENK-ANTRASIT.jpg'); 
+  background: url('../images/get_inspired/DECK-RENK-ANTRASIT.jpg') center/cover no-repeat; 
+  background-color: #343434; /* Fallback */
 }
 
-.bg-kahve { 
-  background-image: url('../images/get_inspired/DECK-RENK-KAHVE.jpg'); 
+.bg-grey { 
+  background: url('../images/get_inspired/DECK-RENK-GRI.jpg') center/cover no-repeat; 
+  background-color: #9E9E9E; /* Fallback */
 }
 
-.bg-gri { 
-  background-image: url('../images/get_inspired/DECK-RENK-GRI.jpg'); 
+.bg-wheat { 
+  /* Mapping 'Wheat' to KREM (Cream) */
+  background: url('../images/get_inspired/DECK-RENK-KREM.jpg') center/cover no-repeat; 
+  background-color: #F5DEB3; /* Fallback */
 }
 
-.bg-krem { 
-  background-image: url('../images/get_inspired/DECK-RENK-KREM.jpg'); 
+.bg-nut { 
+  /* Mapping 'Nut Coffee' to KAHVE (Brown) */
+  background: url('../images/get_inspired/DECK-RENK-KAHVE.jpg') center/cover no-repeat; 
+  background-color: #5D4037; /* Fallback */
 }
 
-/* Icons Grid */
+/* --- NEW ICON GRID (WITH LOGOS) --- */
 .icon-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -182,33 +202,26 @@
 .icon-box {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   font-size: 0.85rem;
-  font-weight: 600;
-  color: #555;
+  font-weight: 700;
+  color: #444;
 }
 
-/* Remove the old font-size rule for 'i' and add this for 'img' */
 .icon-box img {
-  width: 28px;  /* Adjusts the icon size */
-  height: 28px;
-  object-fit: contain; /* Ensures the image doesn't stretch */
-  display: block;
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  /* Optional: filter to make them look uniform if needed */
 }
-
-/* Colors Data */
-.bg-antrasit { background: #343434; }
-.bg-nut { background: #5D4037; }
-.bg-grey { background: #9E9E9E; }
-.bg-wheat { background: #F5DEB3; }
 
 /* Responsive */
 @media (max-width: 992px) {
   .product-display-table {
-    grid-template-columns: 1fr; /* Stack everything */
+    grid-template-columns: 1fr;
   }
   .thumb-col {
-    flex-direction: row; /* Horizontal thumbs on mobile */
+    flex-direction: row;
     order: 2;
   }
   .main-img-col {
