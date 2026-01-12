@@ -294,6 +294,53 @@ ul {
   color: var(--primary-color);
 }
 
+.brand-intro {
+  padding: 100px 0;
+  background-color: var(--white);
+  text-align: center;
+}
+.brand-intro-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.brand-intro h2 {
+  font-size: 3rem;
+  margin-bottom: 25px;
+  color: var(--primary-color);
+  line-height: 1.2;
+}
+.brand-intro p {
+  font-size: 1.15rem;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 35px;
+}
+.btn-text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s ease;
+  padding-bottom: 5px;
+}
+.btn-text-link:hover {
+  color: var(--accent-color);
+  gap: 15px;
+  border-bottom-color: var(--accent-color);
+}
+.btn-text-link i {
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+}
+.btn-text-link:hover i {
+  transform: translateX(5px);
+}
+
 /* 4. SECTIONS & PRODUCTS */
 .section-padding {
   padding: 120px 0;
@@ -312,7 +359,7 @@ ul {
   color: var(--accent-color);
   font-weight: 800;
   text-transform: uppercase;
-  font-size: 1.50rem;
+  font-size: 1.5rem;
   letter-spacing: 2px;
   display: block;
   margin-bottom: 15px;
