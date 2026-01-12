@@ -2,15 +2,24 @@
 
 /* 1. HERO SECTION */
 .resources-hero {
-  /* Koyu, profesyonel bir arka plan görseli */
-  background: linear-gradient(rgba(23, 32, 42, 0.8), rgba(23, 32, 42, 0.8)),
-    url("https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=1920&q=80");
+  background: linear-gradient(rgba(23, 32, 42, 0.85), rgba(23, 32, 42, 0.85)),
+    url("../images/get_inspired/10.jpeg");
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-  padding: 140px 0 100px;
+  padding: 160px 0 120px;
   text-align: center;
   color: #fff;
+}
+
+.hero-subtitle {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
 
 .resources-hero h1 {
@@ -19,29 +28,29 @@
   color: #fff;
   letter-spacing: -1px;
 }
-
 .resources-hero p {
   font-size: 1.2rem;
   max-width: 600px;
   margin: 0 auto;
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 300;
+  line-height: 1.6;
 }
 
 /* 2. GRID LAYOUT */
 .resource-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 3 Kolonlu Yapı */
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px;
-  margin-top: -80px; /* Kartları Hero alanına hafifçe sokmak için */
+  margin-top: -80px;
   position: relative;
   z-index: 10;
 }
 
-/* 3. RESOURCE CARD (Sylvanix Style) */
+/* 3. RESOURCE CARD */
 .resource-card {
   background: var(--white);
-  border-radius: 8px;
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
   transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
@@ -49,71 +58,67 @@
   display: flex;
   flex-direction: column;
 }
-
 .resource-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
 }
 
-/* Kart Resmi */
 .card-image {
   height: 220px;
   overflow: hidden;
   position: relative;
 }
-
 .card-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.6s ease;
 }
-
 .resource-card:hover .card-image img {
   transform: scale(1.1);
 }
 
-/* İkon Alanı (Resmin Üstünde) */
 .icon-overlay {
   position: absolute;
   bottom: 20px;
   right: 20px;
-  width: 50px;
-  height: 50px;
-  background: var(--accent-color);
+  width: 55px;
+  height: 55px;
+  background: var(--white);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #fff;
-  font-size: 1.2rem;
-  box-shadow: 0 5px 15px rgba(192, 57, 43, 0.4);
+  color: var(--accent-color);
+  font-size: 1.4rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   z-index: 2;
+  transition: all 0.3s ease;
+}
+.resource-card:hover .icon-overlay {
+  background: var(--accent-color);
+  color: var(--white);
 }
 
-/* Kart İçeriği */
 .card-content {
-  padding: 30px;
-  flex-grow: 1; /* Kartların eşit boyda olması için */
+  padding: 35px;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-
 .card-content h3 {
   font-size: 1.4rem;
   margin-bottom: 15px;
   color: var(--primary-color);
 }
-
 .card-content p {
   font-size: 0.95rem;
   color: #666;
-  margin-bottom: 25px;
-  line-height: 1.6;
+  margin-bottom: 30px;
+  line-height: 1.7;
 }
 
-/* Buton Link */
 .btn-text-link {
   display: inline-flex;
   align-items: center;
@@ -123,39 +128,141 @@
   color: var(--primary-color);
   text-transform: uppercase;
   letter-spacing: 1px;
-  transition: color 0.3s ease;
-  margin-top: auto; /* En alta itmek için */
+  transition: all 0.3s ease;
+  margin-top: auto;
 }
-
 .btn-text-link i {
   font-size: 0.8rem;
   transition: transform 0.3s ease;
 }
-
 .btn-text-link:hover {
   color: var(--accent-color);
+  gap: 15px;
 }
-
 .btn-text-link:hover i {
   transform: translateX(5px);
+}
+
+/* 4. METİN KISMI (INFO SECTION) */
+.resource-info-section {
+  padding: 100px 0;
+  background: var(--white);
+  border-top: 1px solid #eee;
+}
+.info-content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 50px;
+}
+.info-text h2 {
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  color: var(--primary-color);
+}
+.info-text p {
+  font-size: 1.05rem;
+  color: #666;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  max-width: 700px;
+}
+.info-stat {
+  text-align: center;
+  color: var(--accent-color);
+}
+.info-stat i {
+  font-size: 3rem;
+  margin-bottom: 10px;
+  display: block;
+}
+.info-stat span {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+}
+
+/* 5. ALTTAKİ KISIM (CTA SECTION) */
+.resource-cta-section {
+  padding: 80px 0;
+  background: var(--primary-color); /* Koyu Kurumsal Renk */
+  color: var(--white);
+  text-align: center;
+}
+.cta-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  color: var(--white);
+}
+.cta-content p {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: 35px;
+}
+.cta-buttons {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Özel Butonlar */
+.btn-light {
+  background: var(--white);
+  color: var(--primary-color);
+  padding: 12px 35px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+.btn-light:hover {
+  background: var(--accent-color);
+  color: var(--white);
+  transform: translateY(-3px);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--white);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  padding: 12px 35px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+.btn-outline:hover {
+  border-color: var(--white);
+  background: var(--white);
+  color: var(--primary-color);
 }
 
 /* RESPONSIVE */
 @media (max-width: 992px) {
   .resource-grid {
-    grid-template-columns: repeat(2, 1fr); /* Tablette 2'li */
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .info-content-wrapper {
+    flex-direction: column;
+    text-align: center;
   }
 }
-
 @media (max-width: 768px) {
   .resource-grid {
-    grid-template-columns: 1fr; /* Mobilde tek */
-    margin-top: 40px; /* Mobilde içeri sokma efektini kaldır */
+    grid-template-columns: 1fr;
+    margin-top: 40px;
   }
   .resources-hero {
     padding: 100px 0;
   }
   .resources-hero h1 {
     font-size: 2.5rem;
+  }
+  .cta-buttons {
+    flex-direction: column;
   }
 }
