@@ -122,6 +122,22 @@ ul {
   width: 100%;
 }
 
+.flag-icon {
+  width: 24px;
+  height: auto;
+  border-radius: 2px;
+  display: block;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+/* Ensure the language switch items align correctly */
+.lang-switch {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 12px; /* Slightly reduced padding */
+}
+
 /* Logo */
 .logo {
   margin-right: 80px; /* Logo-Menü arası geniş mesafe */
@@ -558,35 +574,57 @@ a.news-card:hover .news-img img {
 /* 7. FOOTER */
 /* --- 7. FOOTER (PREMIUM DARK) --- */
 footer {
-  background-color: #111; /* Koyu Zemin */
-  color: #a0a0a0; /* Gri Metin */
-  padding: 80px 0 30px;
-  font-size: 0.9rem;
-  margin-top: auto; /* Sayfanın en altına itmek için */
+  background-color: #111;
+  color: #a0a0a0;
+  padding: 50px 0 20px; /* Reduced from 80px 0 30px */
+  font-size: 0.85rem;   /* Slightly smaller font */
+  margin-top: auto;
 }
 
 .footer-top {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr; /* Sol taraf biraz daha geniş */
-  gap: 50px;
-  padding-bottom: 60px;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 30px; /* Reduced gap from 50px */
+  padding-bottom: 10px; /* Reduced padding from 60px */
   border-bottom: 1px solid #222;
 }
-
-/* Marka Alanı */
-.footer-brand-col p {
-  margin-top: 20px;
-  margin-bottom: 25px;
-  line-height: 1.6;
-  max-width: 300px;
-  color: #888;
+.footer-logo img {
+  height: 60px; 
+  width: auto;
+  transition: transform 0.3s ease;
 }
 
-.footer-logo img {
-  height: 50px;
-  width: auto;
-  /* Eğer logon siyahsa ve görünmüyorsa bu filtreyi aç: */
-  /* filter: brightness(0) invert(1); */
+.footer-logo:hover img {
+  transform: scale(1.05);
+}
+
+.text-logo-fallback {
+  font-size: 1.3rem; /* Reduced from 1.5rem */
+}
+
+.footer-brand-col p {
+  margin-top: 15px;    /* Reduced from 20px */
+  margin-bottom: 20px; /* Reduced from 25px */
+  font-size: 0.85rem;  /* Ensure font matches the smaller theme */
+  line-height: 1.5;
+}
+
+.footer-extra-logo img {
+  max-width: 200px; /* Limit width */
+  height: auto;
+  display: block;
+}
+
+/* Adjust headings to match smaller footprint */
+.footer-col h4 {
+  margin-bottom: 15px; /* Reduced from 25px */
+  font-size: 0.95rem;
+}
+
+.footer-brand-col p {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 0.85rem;
 }
 
 .text-logo-fallback {
