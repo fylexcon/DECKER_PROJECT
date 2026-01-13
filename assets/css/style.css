@@ -828,7 +828,6 @@ footer {
 
 .split-wrapper {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Ekranı ikiye böl */
   gap: 60px;
   align-items: center;
 }
@@ -853,6 +852,12 @@ footer {
 }
 
 /* Yazı Alanı */
+/* Yazı Alanı */
+/* Add this new rule to center the text */
+.split-content {
+  text-align: center;
+}
+
 .split-content h2 {
   font-size: 2.5rem;
   margin-bottom: 20px;
