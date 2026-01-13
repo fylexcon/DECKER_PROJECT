@@ -112,35 +112,64 @@ document.addEventListener("DOMContentLoaded", function () {
   const newsCards = document.querySelectorAll(".news-card");
   const nextNewsBtn = document.querySelector(".next-news");
   const prevNewsBtn = document.querySelector(".prev-news");
+  const newsWrapper = document.querySelector(".news-slider-wrapper"); // Wrapper for hover detection
 
   if (newsTrack && newsCards.length > 0) {
     let newsIndex = 0;
+    let autoPlayInterval; // Variable to store the timer
 
-    // Ekranda kaç kart göründüğünü hesapla
     function getVisibleCards() {
-      if (window.innerWidth >= 992) return 3; // Masaüstü
-      if (window.innerWidth >= 768) return 2; // Tablet
-      return 1; // Mobil
+      if (window.innerWidth >= 992) return 3;
+      if (window.innerWidth >= 768) return 2;
+      return 1;
     }
 
     function updateNewsSlider() {
       const visibleCards = getVisibleCards();
       const cardWidth = newsCards[0].offsetWidth;
-      const gap = 30; // CSS gap değeri
+      const gap = 40; // Must match CSS gap
       const moveAmount = (cardWidth + gap) * newsIndex;
       newsTrack.style.transform = `translateX(-${moveAmount}px)`;
     }
 
+    // Helper function to move to next slide
+    function moveNext() {
+      const visibleCards = getVisibleCards();
+      if (newsIndex < newsCards.length - visibleCards) {
+        newsIndex++;
+      } else {
+        newsIndex = 0; // Loop back to the start
+      }
+      updateNewsSlider();
+    }
+
+    // --- Auto Play Logic ---
+    function startAutoPlay() {
+      stopAutoPlay(); // Clear any existing timer first
+      // Change slide every 3000ms (3 seconds)
+      autoPlayInterval = setInterval(moveNext, 3000); 
+    }
+
+    function stopAutoPlay() {
+      clearInterval(autoPlayInterval);
+    }
+
+    // Start auto-play when page loads
+    startAutoPlay();
+
+    // --- Hover Events (Stop on Mouse Enter, Resume on Leave) ---
+    if (newsWrapper) {
+      newsWrapper.addEventListener("mouseenter", stopAutoPlay);
+      newsWrapper.addEventListener("mouseleave", startAutoPlay);
+    }
+
+    // --- Button Events ---
     if (nextNewsBtn) {
       nextNewsBtn.addEventListener("click", () => {
-        const visibleCards = getVisibleCards();
-        // Kaydırılacak kart var mı?
-        if (newsIndex < newsCards.length - visibleCards) {
-          newsIndex++;
-        } else {
-          newsIndex = 0; // Başa dön
-        }
-        updateNewsSlider();
+        moveNext();
+        // Reset timer on manual interaction
+        stopAutoPlay(); 
+        startAutoPlay();
       });
     }
 
@@ -150,16 +179,17 @@ document.addEventListener("DOMContentLoaded", function () {
           newsIndex--;
         }
         updateNewsSlider();
+        stopAutoPlay();
+        startAutoPlay();
       });
     }
 
-    // Ekran boyutu değişirse slider'ı düzelt
     window.addEventListener("resize", updateNewsSlider);
   }
 });
 document.addEventListener("DOMContentLoaded", function () {
   // --- 1. COMPONENT YÜKLEME (HEADER & FOOTER) ---
-  const isPagesFolder = window.location.pathname.includes("/pages/");
+  const isPagesFolder = window.location.pathnxame.includes("/pages/");
   const pathPrefix = isPagesFolder ? "../" : "";
 
   async function loadComponent(placeholderId, filePath) {
@@ -302,47 +332,31 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // --- 5. NEWS SLIDER ---
   const newsTrack = document.querySelector(".news-track");
-  const newsCards = document.querySelectorAll(".news-card");
+  const newsWrapper = document.querySelector(".news-slider-wrapper");
   const nextNewsBtn = document.querySelector(".next-news");
   const prevNewsBtn = document.querySelector(".prev-news");
 
-  if (newsTrack && newsCards.length > 0) {
-    let newsIndex = 0;
+  if (newsTrack) {
+    // 1. Hide manual buttons (not needed for continuous flow)
+    if(nextNewsBtn) nextNewsBtn.style.display = "none";
+    if(prevNewsBtn) prevNewsBtn.style.display = "none";
 
-    function getVisibleCards() {
-      if (window.innerWidth >= 992) return 3;
-      if (window.innerWidth >= 768) return 2;
-      return 1;
-    }
+    // 2. Clone content to create a seamless loop
+    // We duplicate the inner HTML so when the first set scrolls out, the second set is visible.
+    const originalContent = newsTrack.innerHTML;
+    newsTrack.innerHTML += originalContent;
 
-    function updateNewsSlider() {
-      const visibleCards = getVisibleCards();
-      const cardWidth = newsCards[0].offsetWidth;
-      const gap = 40; // CSS gap değeri ile aynı olmalı
-      const moveAmount = (cardWidth + gap) * newsIndex;
-      newsTrack.style.transform = `translateX(-${moveAmount}px)`;
-    }
+    // 3. Add the class that triggers the CSS animation
+    newsTrack.classList.add("continuous-scroll");
 
-    if (nextNewsBtn) {
-      nextNewsBtn.addEventListener("click", () => {
-        const visibleCards = getVisibleCards();
-        if (newsIndex < newsCards.length - visibleCards) {
-          newsIndex++;
-        } else {
-          newsIndex = 0;
-        }
-        updateNewsSlider();
+    // 4. Pause on Hover
+    if (newsWrapper) {
+      newsWrapper.addEventListener("mouseenter", () => {
+        newsTrack.style.animationPlayState = "paused";
+      });
+      newsWrapper.addEventListener("mouseleave", () => {
+        newsTrack.style.animationPlayState = "running";
       });
     }
-
-    if (prevNewsBtn) {
-      prevNewsBtn.addEventListener("click", () => {
-        if (newsIndex > 0) {
-          newsIndex--;
-        }
-        updateNewsSlider();
-      });
-    }
-    window.addEventListener("resize", updateNewsSlider);
   }
 });

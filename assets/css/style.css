@@ -462,7 +462,8 @@ a.product-card:hover .card-overlay {
 .news-track {
   display: flex;
   gap: 40px;
-  transition: transform 0.5s ease;
+  /* Changed from 0.5s to 1.5s for slower movement */
+  transition: transform 1.5s ease; 
 }
 a.news-card {
   display: block;
@@ -819,6 +820,7 @@ footer {
     font-size: 2.2rem;
   }
 }
+
 /* --- SPLIT VIDEO SECTION (Yeni Eklendi) --- */
 
 .split-feature-section {
@@ -891,13 +893,16 @@ footer {
 /* MOBİL DUYARLILIK */
 @media (max-width: 992px) {
   .split-wrapper {
-    grid-template-columns: 1fr; /* Mobilde alt alta olsun */
-    gap: 40px;
-  }
+  display: grid;
+  gap: 60px;
+  align-items: center;
+}
 
-  /* Mobilde videoyu üste al */
+/* Add this new rule to resize and center the video container */
   .split-media {
-    order: -1;
+  max-width: 15%; /* Makes the video area smaller (adjust % as needed) */
+  margin: 0 auto; /* Centers the video horizontally within its column */
+  order: -1;
   }
 
   .split-content {
