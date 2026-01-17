@@ -95,19 +95,24 @@ ul {
 }
 
 /* Main Header (Glass & Sticky) */
+/* --- assets/css/style.css --- */
+
+/* Main Header (Fixed & Stable) */
 #main-header {
-  position: sticky;
+  position: fixed; /* Changed from sticky to fixed */
   top: 0;
+  left: 0;         /* Ensures it aligns to the left edge */
+  width: 100%;     /* Ensures it spans the full width */
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.96); /* Daha opak */
+  background: rgba(255, 255, 255, 0.96);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.03);
-  transition: all 0.3s ease;
-  height: 100px; /* Daha yüksek ve heybetli header */
+  height: 100px;
   display: flex;
   align-items: center;
   border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  transition: all 0.3s ease;
 }
 
 .container {
