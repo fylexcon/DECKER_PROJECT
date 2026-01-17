@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Online Catalog | DECKER</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/catalog.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script>
+      pdfjsLib.GlobalWorkerOptions.workerSrc =
+        "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js";
+    </script>
+    <script src="https://unpkg.com/page-flip/dist/js/page-flip.browser.js"></script>
+  </head>
+  <body>
+    <div id="header-placeholder"></div>
+
+    <section class="catalog-section">
+      <div class="catalog-bg-pattern"></div>
+
+      <div class="container relative-z">
+        <div class="catalog-header text-center">
+          <h1>Explore Our Collection</h1>
+          <p>Interactive Digital Catalog 2025</p>
+        </div>
+
+        <div id="loading-bar">
+          <div class="spinner"></div>
+          <p>Loading Catalog...</p>
+        </div>
+
+        <div class="book-showcase">
+          <div class="book-container">
+            <div id="book"></div>
+          </div>
+        </div>
+
+        <div class="book-controls">
+          <button id="btnPrev" class="ctrl-btn round-btn" title="Previous Page">
+            <i class="fas fa-arrow-left"></i>
+          </button>
+          <span id="pageInfo">Cover</span>
+          <button id="btnNext" class="ctrl-btn round-btn" title="Next Page">
+            <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <div class="catalog-footer">
+          <p>Want to keep a copy?</p>
+          <a
+            href="../assets/documents/DECK-ER CATOLOG.pdf"
+            download
+            class="btn-download-large"
+          >
+            <i class="fas fa-file-pdf"></i> Download Full PDF
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="../assets/js/main.js"></script>
+    <script src="../assets/js/catalog.js"></script>
+  </body>
+</html>
