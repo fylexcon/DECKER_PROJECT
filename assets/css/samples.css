@@ -198,6 +198,75 @@
   background-color: #a93226;
 }
 
+.samples-hero {
+  /* Using a rich texture image for the samples context */
+  background: url('../images/get_inspired/35.jpg') center/cover no-repeat fixed;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  color: #fff;
+  /* Pull behind the transparent header */
+  margin-top: -100px; 
+  padding-top: 100px;
+}
+
+.samples-hero::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  /* Slightly darker gradient to make text pop against texture */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0.4));
+}
+
+.samples-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 700px;
+  padding: 0 20px;
+}
+
+.samples-hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 15px;
+  letter-spacing: -1px;
+  text-transform: uppercase;
+}
+
+.samples-hero p {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.95);
+  line-height: 1.6;
+  font-weight: 400;
+}
+
+.hero-badge {
+  display: inline-block;
+  background: var(--accent-color);
+  color: #fff;
+  padding: 6px 16px;
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .samples-hero {
+    height: 40vh;
+  }
+  .samples-hero h1 {
+    font-size: 2.2rem;
+  }
+}
+
 @media (max-width: 992px) {
   .sample-layout {
     grid-template-columns: 1fr;

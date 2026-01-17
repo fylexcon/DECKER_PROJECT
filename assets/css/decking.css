@@ -53,6 +53,7 @@
   border-radius: 8px;
   box-shadow: var(--shadow-sm);
   margin-bottom: 60px;
+  margin-top: 60px;
   align-items: start;
 }
 
@@ -81,17 +82,22 @@
 
 /* 2. MAIN IMAGE */
 .main-img-col {
-  height: 100%;
-  min-height: 400px;
+  /* Remove height: 100% so the column wraps the image + specs naturally */
+  position: relative;
 }
 
 .main-img {
   width: 100%;
-  height: 100%;
-  max-height: 500px;
-  object-fit: cover;
+  /* CRITICAL FIX: Set a fixed pixel height. 
+     This prevents the page from jumping when changing images. */
+  height: 450px; 
+  
+  /* This ensures the image covers the area without stretching/distortion */
+  object-fit: cover; 
+  
   border-radius: 4px;
   transition: opacity 0.3s ease;
+  display: block; /* Removes potential bottom spacing gaps */
 }
 
 /* 3. INFO STACK */

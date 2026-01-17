@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warranty Policy | DECKER</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  
+  <style>
+    /* --- Page Specific Styles --- */
+    .warranty-hero {
+        background: url('../assets/images/get_inspired/7.jpeg') center/cover no-repeat fixed;
+        height: 45vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        color: #fff;
+        margin-top: -80px;
+        padding-top: 80px;
+    }
+    .warranty-hero::after {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(to bottom, rgba(0,0,0,0.7), rgba(0,0,0,0.4));
+    }
+    .warranty-hero-content {
+        position: relative;
+        z-index: 2;
+        padding: 0 20px;
+    }
+
+    /* Content Container */
+    .policy-container {
+        max-width: 1000px;
+        margin: -60px auto 60px;
+        background: #fff;
+        padding: 60px;
+        border-radius: 8px;
+        box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        position: relative;
+        z-index: 10;
+    }
+
+    .policy-section {
+        margin-bottom: 50px;
+    }
+    .policy-section:last-child {
+        margin-bottom: 0;
+    }
+
+    h2 {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 15px;
+    }
+    
+    h3 {
+        color: var(--accent-color);
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+        margin-top: 25px;
+        font-weight: 700;
+    }
+
+    p {
+        color: #555;
+        line-height: 1.8;
+        margin-bottom: 15px;
+    }
+
+    ul {
+        list-style: none;
+        padding-left: 0;
+    }
+    ul li {
+        position: relative;
+        padding-left: 25px;
+        margin-bottom: 12px;
+        color: #555;
+    }
+    ul li::before {
+        content: "\f00c"; /* FontAwesome check */
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        color: var(--accent-color);
+        position: absolute;
+        left: 0;
+        top: 2px;
+    }
+
+    /* Tables */
+    .warranty-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 30px 0;
+        font-size: 0.95rem;
+    }
+    .warranty-table th, .warranty-table td {
+        border: 1px solid #eee;
+        padding: 15px;
+        text-align: left;
+    }
+    .warranty-table th {
+        background-color: var(--primary-color);
+        color: #fff;
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+    .warranty-table tr:nth-child(even) {
+        background-color: #f9f9f9;
+    }
+    .warranty-table tr:hover {
+        background-color: #f0f0f0;
+    }
+
+    .alert-box {
+        background: #fff8f8;
+        border-left: 4px solid var(--accent-color);
+        padding: 20px;
+        margin: 30px 0;
+        color: #555;
+        font-size: 0.95rem;
+    }
+
+    @media (max-width: 768px) {
+        .policy-container {
+            padding: 30px;
+            width: 90%;
+        }
+        .warranty-table {
+            display: block;
+            overflow-x: auto;
+        }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <section class="warranty-hero">
+    <div class="warranty-hero-content">
+      <span style="display:block; font-size: 1rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; opacity: 0.8;">Quality Assurance</span>
+      <h1 style="font-size: 3rem; font-weight: 800; margin: 0;">LIMITED WARRANTY</h1>
+    </div>
+  </section>
+
+  <div class="policy-container">
+    
+    <div class="policy-section">
+      <p style="font-size: 1.1rem; font-weight: 600;">
+        At Decker®, we are committed to ensuring that our customers enjoy long-lasting satisfaction from our WPC Wall Cladding products. [cite_start]This warranty reflects strict quality control standards compliant with U.S. law[cite: 4, 5].
+      </p>
+    </div>
+
+    <div class="policy-section">
+      <h2>Warranty Coverage Periods</h2>
+      [cite_start]<p>Decker warrants that its products will maintain structural performance for the periods indicated below, provided they are installed according to our written guidelines[cite: 6].</p>
+      
+      <table class="warranty-table">
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Residential Warranty</th>
+            <th>Commercial Warranty</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Decker Istanbul</strong></td>
+            <td>25 Years</td>
+            <td>15 Years</td>
+          </tr>
+          <tr>
+            <td><strong>Decker Paris</strong></td>
+            <td>30 Years</td>
+            <td>15 Years</td>
+          </tr>
+          <tr>
+            <td><strong>Decker Miami</strong></td>
+            <td>30 Years</td>
+            <td>15 Years</td>
+          </tr>
+        </tbody>
+      </table>
+      [cite_start]<p style="font-size: 0.85rem; color: #888;">* Refer to Table A in official documentation[cite: 8].</p>
+    </div>
+
+    <div class="policy-section">
+      <h2>Scope of Coverage</h2>
+      
+      <h3>Structural Performance</h3>
+      <p>
+        [cite_start]Coverage includes the product's ability to retain load-bearing capacity and resistance to warping, cracking, splitting, or separation at panel joints due to material defects[cite: 10, 11].
+      </p>
+
+      <h3>Fade Resistance</h3>
+      <p>
+        [cite_start]<strong>Exterior Panels:</strong> Color change is limited to Delta E ≤ 10 during the first 5 years and Delta E ≤ 25 in subsequent years[cite: 28].<br>
+        [cite_start]<strong>Interior Panels:</strong> No color loss occurs under normal interior usage[cite: 30].
+      </p>
+
+      <h3>Stain Protection</h3>
+      <ul>
+        [cite_start]<li><strong>Decker Paris:</strong> Spills (oil, paint) will not stain if wiped immediately with a damp cloth[cite: 21].</li>
+        [cite_start]<li><strong>Istanbul & Miami:</strong> Heavy substances must be wiped off within 1 day using soapy water[cite: 22, 23].</li>
+      </ul>
+    </div>
+
+    <div class="policy-section">
+      <h2>Important Exclusions</h2>
+      <p>This warranty does not cover damages arising from:</p>
+      <ul>
+        [cite_start]<li><strong>Improper Installation:</strong> Failure to use Decker-specified fasteners or authorized contractors[cite: 47].</li>
+        [cite_start]<li><strong>Acts of God:</strong> Natural disasters including floods, earthquakes, hurricanes, and lightning[cite: 52].</li>
+        [cite_start]<li><strong>Heat Exposure:</strong> Exposure to temperatures exceeding 275°F (135°C)[cite: 57].</li>
+        [cite_start]<li><strong>Unauthorized Modifications:</strong> Applying paint, varnish, or coatings voids the warranty[cite: 39].</li>
+      </ul>
+    </div>
+
+    <div class="policy-section">
+      <h2>Compensation Structure (Prorated)</h2>
+      <p>
+        [cite_start]If a valid claim arises, Decker® will provide compensation (Product Replacement or Refund) based on the prorated schedule below[cite: 63, 64].
+      </p>
+
+      <table class="warranty-table" style="text-align: center;">
+        <thead>
+          <tr>
+            <th style="text-align:center;">Year of Claim</th>
+            <th style="text-align:center;">30-Year Product Coverage</th>
+            <th style="text-align:center;">25-Year Product Coverage</th>
+            <th style="text-align:center;">15-Year Product Coverage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>1 - 3</td><td>90%</td><td>80%</td><td>70%</td></tr>
+          <tr><td>4 - 7</td><td>80%</td><td>80%</td><td>60%</td></tr>
+          <tr><td>7 - 9</td><td>70%</td><td>75%</td><td>40%</td></tr>
+          <tr><td>9 - 11</td><td>60%</td><td>70%</td><td>30%</td></tr>
+          <tr><td>11 - 13</td><td>50%</td><td>60%</td><td>20%</td></tr>
+          <tr><td>13 - 15</td><td>40%</td><td>50%</td><td>10%</td></tr>
+          <tr><td>15 - 17</td><td>40%</td><td>40%</td><td>0%</td></tr>
+          <tr><td>17 - 25</td><td>30 - 20%</td><td>30 - 10%</td><td>0%</td></tr>
+          <tr><td>25+</td><td>10%</td><td>0%</td><td>0%</td></tr>
+        </tbody>
+      </table>
+      [cite_start]<p style="font-size: 0.85rem; color: #888;">* Percentages represent the portion of the original purchase price covered[cite: 70].</p>
+    </div>
+
+    <div class="alert-box">
+      <strong>Transferability:</strong> This warranty is non-transferable, except during the first 3 years. [cite_start]A one-time transfer to a new owner is permitted with written notification and approval[cite: 43].
+    </div>
+
+    <div class="policy-section">
+      <p style="font-size: 0.9rem; color: #777; border-top: 1px solid #eee; padding-top: 20px;">
+        <em>Legal Acknowledgment: By purchasing or installing Decker products, you agree to be bound by the terms of this limited warranty. [cite_start]This warranty is governed by the laws of the United States[cite: 90, 92].</em>
+      </p>
+    </div>
+
+  </div>
+
+  <div id="footer-placeholder"></div>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
