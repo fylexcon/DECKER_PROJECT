@@ -2,8 +2,11 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Online Catalog | DECKER</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>Digital Catalog | DECKER</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -29,48 +32,67 @@
   <body>
     <div id="header-placeholder"></div>
 
-    <section class="catalog-section">
-      <div class="catalog-bg-pattern"></div>
+    <section class="catalog-showcase">
+      <div class="container">
+        <div class="showcase-wrapper">
+          <div class="showcase-content">
+            <span class="badge-new">NEW COLLECTION</span>
+            <h1>Explore Our 2025<br />Digital Catalog</h1>
+            <p>
+              Discover the future of outdoor living with our interactive
+              flipbook experience.
+            </p>
 
-      <div class="container relative-z">
-        <div class="catalog-header text-center">
-          <h1>Explore Our Collection</h1>
-          <p>Interactive Digital Catalog 2025</p>
-        </div>
+            <button id="openBookBtn" class="btn-primary-large">
+              <i class="fas fa-book-open"></i> READ CATALOG
+            </button>
 
-        <div id="loading-bar">
-          <div class="spinner"></div>
-          <p>Loading Catalog...</p>
-        </div>
-
-        <div class="book-showcase">
-          <div class="book-container">
-            <div id="book"></div>
+            <div class="download-option">
+              <a href="../assets/documents/DECK-ER CATOLOG.pdf" download>
+                Or download PDF file <i class="fas fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
-        </div>
 
-        <div class="book-controls">
-          <button id="btnPrev" class="ctrl-btn round-btn" title="Previous Page">
-            <i class="fas fa-arrow-left"></i>
-          </button>
-          <span id="pageInfo">Cover</span>
-          <button id="btnNext" class="ctrl-btn round-btn" title="Next Page">
-            <i class="fas fa-arrow-right"></i>
-          </button>
-        </div>
-
-        <div class="catalog-footer">
-          <p>Want to keep a copy?</p>
-          <a
-            href="../assets/documents/DECK-ER CATOLOG.pdf"
-            download
-            class="btn-download-large"
-          >
-            <i class="fas fa-file-pdf"></i> Download Full PDF
-          </a>
+          <div class="showcase-image">
+            <img
+              src="../assets/images/get_inspired/12.png"
+              alt="Decker Catalog Cover"
+              class="floating-cover"
+            />
+          </div>
         </div>
       </div>
     </section>
+
+    <div id="catalogModal" class="catalog-overlay">
+      <div class="viewer-top-bar">
+        <div class="brand">DECKER VIEWER</div>
+        <button id="closeBookBtn" class="btn-close-viewer">
+          <i class="fas fa-times"></i> CLOSE
+        </button>
+      </div>
+
+      <div class="viewer-body">
+        <div id="loadingBar">
+          <div class="spinner"></div>
+          <span>Loading...</span>
+        </div>
+
+        <div id="book"></div>
+
+        <button id="btnPrev" class="nav-arrow left">
+          <i class="fas fa-chevron-left"></i>
+        </button>
+        <button id="btnNext" class="nav-arrow right">
+          <i class="fas fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <div class="viewer-bottom-bar">
+        <span id="pageCounter">Page 1</span>
+      </div>
+    </div>
 
     <div id="footer-placeholder"></div>
 

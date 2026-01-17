@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,19 +7,37 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Open+Sans:wght@300;400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
     <link rel="stylesheet" href="assets/css/style.css" />
 
     <style>
-      :root { --decker-red: #e31e24; }
+      :root {
+        --decker-red: #e31e24;
+      }
 
       /* Video Bölümü Tasarımı */
-      .video-feature-section { padding: 100px 0; background-color: #fff; text-align: center; }
-      .split-content-centered { max-width: 850px; margin: 0 auto 50px auto; }
+      .video-feature-section {
+        padding: 100px 0;
+        background-color: #fff;
+        text-align: center;
+      }
+      .split-content-centered {
+        max-width: 850px;
+        margin: 0 auto 50px auto;
+      }
       .split-content-centered .sub-heading {
         color: var(--decker-red);
         font-weight: 700;
@@ -30,13 +48,17 @@
         margin-bottom: 15px;
       }
       .split-content-centered h2 {
-        font-family: 'Montserrat', sans-serif;
+        font-family: "Montserrat", sans-serif;
         font-weight: 800;
         font-size: 48px;
         color: #1a202c;
         margin-bottom: 25px;
       }
-      .split-content-centered p { color: #718096; line-height: 1.8; font-size: 18px; }
+      .split-content-centered p {
+        color: #718096;
+        line-height: 1.8;
+        font-size: 18px;
+      }
 
       /* Büyük Video Kutusu */
       .video-main-box {
@@ -49,18 +71,29 @@
         box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
         transition: transform 0.4s ease;
       }
-      .video-main-box:hover { transform: scale(1.01); }
-      .video-main-box img { width: 100%; height: auto; display: block; filter: brightness(0.85); }
+      .video-main-box:hover {
+        transform: scale(1.01);
+      }
+      .video-main-box img {
+        width: 100%;
+        height: auto;
+        display: block;
+        filter: brightness(0.85);
+      }
 
       /* Kırmızı Oynat Butonu */
       .play-btn-circle {
         position: absolute;
-        top: 50%; left: 50%;
+        top: 50%;
+        left: 50%;
         transform: translate(-50%, -50%);
-        width: 100px; height: 100px;
+        width: 100px;
+        height: 100px;
         background: var(--decker-red);
         border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         box-shadow: 0 0 40px rgba(227, 30, 36, 0.5);
         transition: 0.3s;
         z-index: 2;
@@ -72,18 +105,35 @@
         border-color: transparent transparent transparent #ffffff;
         margin-left: 10px;
       }
-      .video-main-box:hover .play-btn-circle { transform: translate(-50%, -50%) scale(1.1); background: #ff0000; }
+      .video-main-box:hover .play-btn-circle {
+        transform: translate(-50%, -50%) scale(1.1);
+        background: #ff0000;
+      }
 
       /* Modal Kapatma */
       .btn-video-close {
-        position: absolute; right: -45px; top: -45px;
-        background: none; border: none; color: #fff; font-size: 35px; cursor: pointer;
+        position: absolute;
+        right: -45px;
+        top: -45px;
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 35px;
+        cursor: pointer;
       }
 
       @media (max-width: 768px) {
-        .split-content-centered h2 { font-size: 32px; }
-        .play-btn-circle { width: 70px; height: 70px; }
-        .btn-video-close { right: 0; top: -55px; }
+        .split-content-centered h2 {
+          font-size: 32px;
+        }
+        .play-btn-circle {
+          width: 70px;
+          height: 70px;
+        }
+        .btn-video-close {
+          right: 0;
+          top: -55px;
+        }
       }
     </style>
   </head>
@@ -98,7 +148,10 @@
         <div class="slide-overlay"></div>
         <div class="hero-content">
           <h1>Engineered for Endurance,<br />Designed for Beauty</h1>
-          <p>High-quality WPC composite deck boards, wall panels, and pergola systems.</p>
+          <p>
+            High-quality WPC composite deck boards, wall panels, and pergola
+            systems.
+          </p>
         </div>
       </div>
     </section>
@@ -108,15 +161,24 @@
         <div class="info-grid">
           <div class="info-box">
             <i class="fas fa-calculator info-icon"></i>
-            <div><a href="pages/estimate-cost.html"><h3>ESTIMATE COST</h3></a><p>Get a quick cost estimation.</p></div>
+            <div>
+              <a href="pages/estimate-cost.html"><h3>ESTIMATE COST</h3></a>
+              <p>Get a quick cost estimation.</p>
+            </div>
           </div>
           <div class="info-box">
             <i class="fas fa-box-open info-icon"></i>
-            <div><a href="pages/free-samples.html"><h3>FREE SAMPLE</h3></a><p>Order samples to feel the quality.</p></div>
+            <div>
+              <a href="pages/free-samples.html"><h3>FREE SAMPLE</h3></a>
+              <p>Order samples to feel the quality.</p>
+            </div>
           </div>
           <div class="info-box">
             <i class="fas fa-lightbulb info-icon"></i>
-            <div><a href="pages/get-inspired.html"><h3>GET INSPIRED</h3></a><p>Browse our gallery of projects.</p></div>
+            <div>
+              <a href="pages/get-inspired.html"><h3>GET INSPIRED</h3></a>
+              <p>Browse our gallery of projects.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -129,7 +191,7 @@
           <h2>Comprehensive WPC Solutions</h2>
           <p>Explore our wide range of innovative composite products.</p>
         </div>
-        </div>
+      </div>
     </section>
 
     <section class="video-feature-section bg-white">
@@ -137,11 +199,23 @@
         <div class="split-content-centered">
           <span class="sub-heading">DISCOVER DECKER BRAND</span>
           <h2>Nature Meets Technology</h2>
-          <p>Our WPC products offer the warmth of wood with the durability of modern composites. Resistant to water, insects, and decay, our solutions are designed for longevity without the need for constant maintenance.</p>
+          <p>
+            Our WPC products offer the warmth of wood with the durability of
+            modern composites. Resistant to water, insects, and decay, our
+            solutions are designed for longevity without the need for constant
+            maintenance.
+          </p>
         </div>
 
-        <div class="video-main-box" data-bs-toggle="modal" data-bs-target="#videoPopup">
-          <img src="https://img.youtube.com/vi/ITaEGNWsgnA/maxresdefault.jpg" alt="Decker Production">
+        <div
+          class="video-main-box"
+          data-bs-toggle="modal"
+          data-bs-target="#videoPopup"
+        >
+          <img
+            src="https://img.youtube.com/vi/ITaEGNWsgnA/maxresdefault.jpg"
+            alt="Decker Production"
+          />
           <div class="play-btn-circle"></div>
         </div>
       </div>
@@ -155,43 +229,66 @@
         </div>
 
         <div class="news-slider-wrapper">
-          <button class="news-nav-btn prev-news"><i class="fas fa-chevron-left"></i></button>
-          <button class="news-nav-btn next-news"><i class="fas fa-chevron-right"></i></button>
+          <button class="news-nav-btn prev-news">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="news-nav-btn next-news">
+            <i class="fas fa-chevron-right"></i>
+          </button>
 
           <div class="news-track">
             <a href="pages/news-1.html" class="news-card">
-              <div class="news-img"><img src="assets/images/get_inspired/40.jpeg" alt="News 1" /></div>
+              <div class="news-img">
+                <img src="assets/images/get_inspired/40.jpeg" alt="News 1" />
+              </div>
               <div class="news-content">
                 <span class="news-date">MAR 15, 2025</span>
                 <h3>New Deep Embossed Series</h3>
-                <p>We are launching our new deep embossed decking series with enhanced texture.</p>
+                <p>
+                  We are launching our new deep embossed decking series with
+                  enhanced texture.
+                </p>
               </div>
             </a>
 
             <a href="pages/news-2.html" class="news-card">
-              <div class="news-img"><img src="assets/images/yapi-fuari/25.jpg" alt="News 2" /></div>
+              <div class="news-img">
+                <img src="assets/images/yapi-fuari/25.jpg" alt="News 2" />
+              </div>
               <div class="news-content">
                 <span class="news-date">FEB 20, 2025</span>
                 <h3>Istanbul Showroom</h3>
-                <p>Join us at the upcoming construction fair in Istanbul to see our latest products.</p>
+                <p>
+                  Join us at the upcoming construction fair in Istanbul to see
+                  our latest products.
+                </p>
               </div>
             </a>
 
             <a href="pages/news-3.html" class="news-card">
-              <div class="news-img"><img src="assets/images/yapi-fuari/32.jpg" alt="News 3" /></div>
+              <div class="news-img">
+                <img src="assets/images/yapi-fuari/32.jpg" alt="News 3" />
+              </div>
               <div class="news-content">
                 <span class="news-date">JAN 10, 2025</span>
                 <h3>Project Milestone: 1000+</h3>
-                <p>We have successfully completed over 1000 projects worldwide this year.</p>
+                <p>
+                  We have successfully completed over 1000 projects worldwide
+                  this year.
+                </p>
               </div>
             </a>
 
             <a href="pages/news-4.html" class="news-card">
-              <div class="news-img"><img src="assets/images/get_inspired/43.JPG" alt="News 4" /></div>
+              <div class="news-img">
+                <img src="assets/images/get_inspired/43.JPG" alt="News 4" />
+              </div>
               <div class="news-content">
                 <span class="news-date">DEC 05, 2024</span>
                 <h3>Sustainability Award</h3>
-                <p>Deck-er receives the green building material award for 2024.</p>
+                <p>
+                  Deck-er receives the green building material award for 2024.
+                </p>
               </div>
             </a>
           </div>
@@ -205,9 +302,21 @@
       <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content bg-transparent border-0">
           <div class="modal-body p-0 position-relative">
-            <button type="button" class="btn-video-close" data-bs-dismiss="modal"><i class="fas fa-times"></i></button>
+            <button
+              type="button"
+              class="btn-video-close"
+              data-bs-dismiss="modal"
+            >
+              <i class="fas fa-times"></i>
+            </button>
             <div class="ratio ratio-16x9 shadow-lg">
-              <iframe id="youtubeIframe" data-src="https://www.youtube.com/embed/ITaEGNWsgnA?autoplay=1&rel=0" frameborder="0" allowfullscreen allow="autoplay"></iframe>
+              <iframe
+                id="youtubeIframe"
+                data-src="https://www.youtube.com/embed/ITaEGNWsgnA?autoplay=1&rel=0"
+                frameborder="0"
+                allowfullscreen
+                allow="autoplay"
+              ></iframe>
             </div>
           </div>
         </div>
@@ -217,12 +326,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/main.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const videoModal = document.getElementById('videoPopup');
-        const videoIframe = document.getElementById('youtubeIframe');
-        const videoSrc = videoIframe.getAttribute('data-src');
-        videoModal.addEventListener('shown.bs.modal', function () { videoIframe.setAttribute('src', videoSrc); });
-        videoModal.addEventListener('hide.bs.modal', function () { videoIframe.setAttribute('src', ''); });
+      document.addEventListener("DOMContentLoaded", function () {
+        const videoModal = document.getElementById("videoPopup");
+        const videoIframe = document.getElementById("youtubeIframe");
+        const videoSrc = videoIframe.getAttribute("data-src");
+        videoModal.addEventListener("shown.bs.modal", function () {
+          videoIframe.setAttribute("src", videoSrc);
+        });
+        videoModal.addEventListener("hide.bs.modal", function () {
+          videoIframe.setAttribute("src", "");
+        });
       });
     </script>
   </body>

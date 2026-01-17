@@ -1,118 +1,132 @@
-/* --- assets/js/catalog.js (DOUBLE PAGE MODE) --- */
+/* --- assets/js/catalog.js (PERFECT FIT) --- */
 
-document.addEventListener("DOMContentLoaded", async function () {
-  const pdfPath = "../assets/documents/DECK-ER CATOLOG.pdf";
+document.addEventListener("DOMContentLoaded", function () {
+  const openBtn = document.getElementById("openBookBtn");
+  const closeBtn = document.getElementById("closeBookBtn");
+  const modal = document.getElementById("catalogModal");
   const bookElement = document.getElementById("book");
-  const loadingBar = document.getElementById("loading-bar");
-  const pageInfo = document.getElementById("pageInfo");
-  let pageFlip;
+  const loadingBar = document.getElementById("loadingBar");
+  const pageCounter = document.getElementById("pageCounter");
+  const prevBtn = document.getElementById("btnPrev");
+  const nextBtn = document.getElementById("btnNext");
 
-  try {
-    const loadingTask = pdfjsLib.getDocument(pdfPath);
-    const pdf = await loadingTask.promise;
-    const numPages = pdf.numPages;
+  let pageFlip = null;
+  let pdfDoc = null;
+  let isLoaded = false;
 
-    console.log(`Catalog Loaded: ${numPages} pages.`);
+  // --- MODAL İŞLEMLERİ ---
+  openBtn.addEventListener("click", () => {
+    modal.classList.add("active");
+    document.body.style.overflow = "hidden";
+    if (!isLoaded) loadCatalog();
+  });
 
-    // --- 1. SAYFALARI OLUŞTUR ---
-    // Hız için scale 1.0 (Yeterli kalite)
-    const renderScale = window.innerWidth < 768 ? 0.8 : 1.2;
+  closeBtn.addEventListener("click", () => {
+    modal.classList.remove("active");
+    document.body.style.overflow = "";
+  });
 
-    for (let i = 1; i <= numPages; i++) {
-      const page = await pdf.getPage(i);
-      const viewport = page.getViewport({ scale: renderScale });
+  // --- PDF YÜKLEME ---
+  async function loadCatalog() {
+    try {
+      loadingBar.style.display = "block";
+      const pdfPath = "../assets/documents/DECK-ER CATOLOG.pdf";
 
-      const canvas = document.createElement("canvas");
-      const context = canvas.getContext("2d");
+      const loadingTask = pdfjsLib.getDocument(pdfPath);
+      pdfDoc = await loadingTask.promise;
+      const numPages = pdfDoc.numPages;
 
-      canvas.width = viewport.width;
-      canvas.height = viewport.height;
+      // Netlik için Scale 2.0 (Mobilde 1.5)
+      const scale = window.innerWidth < 768 ? 1.5 : 2.0;
 
-      // Mobilde kenarları yumuşat
-      canvas.style.width = "100%";
-      canvas.style.height = "100%";
+      bookElement.innerHTML = ""; // Temizle
 
-      await page.render({
-        canvasContext: context,
-        viewport: viewport,
-      }).promise;
+      for (let i = 1; i <= numPages; i++) {
+        const page = await pdfDoc.getPage(i);
+        const viewport = page.getViewport({ scale: scale });
 
-      const pageWrapper = document.createElement("div");
-      pageWrapper.classList.add("page-wrapper");
-      // Sayfa numarası eklemek istersen:
-      // pageWrapper.innerHTML = `<span class="page-num">${i}</span>`;
-      pageWrapper.appendChild(canvas);
-      bookElement.appendChild(pageWrapper);
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = viewport.width;
+        canvas.height = viewport.height;
+
+        // CSS ile %100 doldur
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+
+        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+        const div = document.createElement("div");
+        div.classList.add("page-wrapper");
+        div.appendChild(canvas);
+        bookElement.appendChild(div);
+      }
+
+      loadingBar.style.display = "none";
+      initFlipBook();
+      isLoaded = true;
+    } catch (err) {
+      console.error(err);
+      loadingBar.innerHTML = "<p style='color:#fff'>Error loading PDF.</p>";
     }
+  }
 
-    loadingBar.style.display = "none";
-
-    // --- 2. KİTAP AYARLARI (ÇİFT SAYFA İÇİN GÜNCELLENDİ) ---
+  // --- KİTAP BOYUTLANDIRMA (MAGIC FORMULA) ---
+  function initFlipBook() {
     const isMobile = window.innerWidth < 768;
 
-    // Masaüstünde sayfa genişliğini biraz daha daraltalım ki ikisi yan yana sığsın
-    const bookWidth = isMobile ? 350 : 450;
-    const bookHeight = isMobile ? 500 : 640;
+    // Ekranın kullanılabilir alanını al (Toolbarlar hariç)
+    // Üst(60) + Alt(40) = 100px. Biz güvenli pay olarak 120px düşelim.
+    const availH = window.innerHeight - 120;
+    const availW = window.innerWidth - (isMobile ? 20 : 100);
+
+    // PDF A4 Oranı (0.707)
+    const aspectRatio = 0.707;
+
+    // Yükseklik = Mevcut alanın %90'ı (Taşmayı önlemek için kritik hamle)
+    let bookH = availH * 0.95;
+    let bookW = bookH * aspectRatio;
+
+    // Genişlik kontrolü (Ekrana sığmıyorsa küçült)
+    if (!isMobile) {
+      // Masaüstü (Çift Sayfa)
+      if (bookW * 2 > availW) {
+        bookW = (availW / 2) * 0.95; // Genişliğe göre ayarla
+        bookH = bookW / aspectRatio;
+      }
+    } else {
+      // Mobil (Tek Sayfa)
+      if (bookW > availW) {
+        bookW = availW * 0.95;
+        bookH = bookW / aspectRatio;
+      }
+    }
 
     pageFlip = new St.PageFlip(bookElement, {
-      width: bookWidth,
-      height: bookHeight,
-
-      // ÖNEMLİ: Çift sayfa için boyut ayarı
+      width: bookW,
+      height: bookH,
       size: isMobile ? "fixed" : "stretch",
-
-      minWidth: 300,
-      maxWidth: 1000,
-      minHeight: 400,
-      maxHeight: 1200,
-
-      showCover: true, // İlk sayfa kapak olsun (Tek görünür)
+      minWidth: 200,
+      maxWidth: 2500,
+      minHeight: 300,
+      maxHeight: 2500,
+      showCover: true,
       maxShadowOpacity: 0.5,
-
-      // !!! KRİTİK AYAR !!!
-      // False yaparsak masaüstünde çift sayfa (landscape) zorlar
       usePortrait: isMobile ? true : false,
-
       mobileScrollSupport: false,
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll(".page-wrapper"));
 
-    // --- 3. KONTROLLER ---
-    const btnPrev = document.getElementById("btnPrev");
-    const btnNext = document.getElementById("btnNext");
+    // Kontroller
+    prevBtn.onclick = () => pageFlip.flipPrev();
+    nextBtn.onclick = () => pageFlip.flipNext();
 
-    function updateInfo() {
-      // Çift sayfa modunda sayfa numaralarını göstermek için mantık
-      // Örn: Kapak (0), 1-2, 3-4 diye gider.
-      const current = pageFlip.getCurrentPageIndex() + 1;
+    pageFlip.on("flip", (e) => {
+      const current = e.data + 1;
       const total = pageFlip.getPageCount();
-
-      if (current === 1) {
-        pageInfo.innerText = `Cover`;
-      } else {
-        // Çift sayfa gösterimi
-        pageInfo.innerText = `${current} - ${current + 1 > total ? total : current + 1} / ${total}`;
-      }
-    }
-
-    btnPrev.addEventListener("click", () => {
-      pageFlip.flipPrev();
+      // Basit sayfa gösterimi
+      pageCounter.innerText = `Page ${current} of ${total}`;
     });
-    btnNext.addEventListener("click", () => {
-      pageFlip.flipNext();
-    });
-
-    pageFlip.on("flip", updateInfo);
-
-    // Yüklendikten sonra bilgiyi güncelle
-    setTimeout(updateInfo, 1000);
-  } catch (error) {
-    console.error("Catalog Error:", error);
-    loadingBar.innerHTML = `
-      <p style="color:#c0392b; font-weight:bold;">
-        Catalog could not be loaded. <br>
-        <a href="../assets/documents/DECK-ER CATOLOG.pdf" style="text-decoration:underline;">Click here to view PDF</a>
-      </p>`;
   }
 });
