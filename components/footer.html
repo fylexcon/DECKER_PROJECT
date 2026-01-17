@@ -1,4 +1,24 @@
 <footer>
+  <div class="footer-newsletter">
+    <div class="container">
+      <div class="newsletter-wrapper">
+        <div class="newsletter-text">
+          <h3>Stay Connected</h3>
+          <p>
+            Join our mailing list to receive the latest news, product updates,
+            and special offers directly to your inbox.
+          </p>
+        </div>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+          <div class="input-group">
+            <input type="email" placeholder="Enter your email address" required />
+            <button type="submit">Subscribe</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <div class="container">
     <div class="footer-top">
       <div class="footer-brand-col">
@@ -21,12 +41,8 @@
           <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
           <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
         </div>
-
         <div class="footer-extra-logo" style="margin-top: 20px;">
-             <img
-            src="assets/images/logos/nadra.jpg"
-            class="img-fluid"            alt="NADRA Certified"
-          />
+             <img src="assets/images/logos/nadra.jpg" class="img-fluid" alt="NADRA Certified" />
         </div>
       </div>
 
@@ -75,3 +91,4 @@
       </div>
     </div>
   </div>
+</footer>

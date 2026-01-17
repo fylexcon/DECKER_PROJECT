@@ -580,6 +580,7 @@ a.news-card:hover .news-img img {
 /* 7. FOOTER */
 /* --- 7. FOOTER (PREMIUM DARK) --- */
 footer {
+  padding-top: 0 !important;
   background-color: #111;
   color: #a0a0a0;
   padding: 50px 0 20px; /* Reduced from 80px 0 30px */
@@ -587,7 +588,16 @@ footer {
   margin-top: auto;
 }
 
+.footer-newsletter {
+  background-color: #1a1a1a; /* Distinct Dark Grey (Lighter than #111) */
+  padding: 50px 0;
+  border-bottom: 1px solid #2a2a2a; /* Subtle separator line */
+}
+
+
+
 .footer-top {
+  padding-top: 60px;
   display: grid;
   grid-template-columns: 1.5fr 1fr 1fr 1fr;
   gap: 30px; /* Reduced gap from 50px */
@@ -728,6 +738,101 @@ footer {
 }
 .footer-legal .sep {
   color: #444;
+}
+
+/* --- NEWSLETTER SUBSCRIPTION --- */
+.subscribe-col {
+  min-width: 250px; /* Ensure it doesn't get too squashed */
+}
+
+.newsletter-form .input-group {
+  display: flex;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px; /* Premium capsule shape */
+  padding: 5px;
+  width: 100%;
+  max-width: 450px;
+  transition: border-color 0.3s;
+}
+
+.newsletter-form .input-group:focus-within {
+  border-color: var(--accent-color);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.newsletter-form input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 10px 20px;
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+.newsletter-form input::placeholder {
+  color: #777;
+}
+
+.newsletter-form button {
+  background: var(--accent-color);
+  color: #fff;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  cursor: pointer;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+  background: #fff;
+  color: var(--accent-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.newsletter-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+
+.newsletter-text h3 {
+  color: #fff;
+  font-size: 1.5rem;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
+}
+
+.newsletter-text p {
+  color: #bbb;
+  margin: 0;
+  font-size: 0.95rem;
+  max-width: 500px;
+}
+
+@media (max-width: 768px) {
+  .newsletter-wrapper {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .newsletter-form {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .newsletter-text p {
+    margin: 0 auto; /* Center text on mobile */
+  }
 }
 
 /* RESPONSIVE */
