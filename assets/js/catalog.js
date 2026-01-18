@@ -1,46 +1,34 @@
-/* --- assets/js/catalog.js (PERFECT FIT) --- */
+/* --- assets/js/catalog.js --- */
 
 document.addEventListener("DOMContentLoaded", function () {
-  const openBtn = document.getElementById("openBookBtn");
-  const closeBtn = document.getElementById("closeBookBtn");
-  const modal = document.getElementById("catalogModal");
   const bookElement = document.getElementById("book");
-  const loadingBar = document.getElementById("loadingBar");
+  const loadingState = document.getElementById("loadingState");
   const pageCounter = document.getElementById("pageCounter");
   const prevBtn = document.getElementById("btnPrev");
   const nextBtn = document.getElementById("btnNext");
 
   let pageFlip = null;
   let pdfDoc = null;
-  let isLoaded = false;
 
-  // --- MODAL İŞLEMLERİ ---
-  openBtn.addEventListener("click", () => {
-    modal.classList.add("active");
-    document.body.style.overflow = "hidden";
-    if (!isLoaded) loadCatalog();
-  });
+  // 1. Start Loading Immediately
+  initCatalog();
 
-  closeBtn.addEventListener("click", () => {
-    modal.classList.remove("active");
-    document.body.style.overflow = "";
-  });
-
-  // --- PDF YÜKLEME ---
-  async function loadCatalog() {
+  async function initCatalog() {
     try {
-      loadingBar.style.display = "block";
+      // PDF Path (Ensure this matches your file structure exactly)
+      // Note: Kept the filename typo "CATOLOG" as per your file list
       const pdfPath = "../assets/documents/DECK-ER CATOLOG.pdf";
 
       const loadingTask = pdfjsLib.getDocument(pdfPath);
       pdfDoc = await loadingTask.promise;
       const numPages = pdfDoc.numPages;
 
-      // Netlik için Scale 2.0 (Mobilde 1.5)
+      // Higher scale for crisp text
       const scale = window.innerWidth < 768 ? 1.5 : 2.0;
 
-      bookElement.innerHTML = ""; // Temizle
+      bookElement.innerHTML = ""; // Clear container
 
+      // Render all pages to Canvas
       for (let i = 1; i <= numPages; i++) {
         const page = await pdfDoc.getPage(i);
         const viewport = page.getViewport({ scale: scale });
@@ -50,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function () {
         canvas.width = viewport.width;
         canvas.height = viewport.height;
 
-        // CSS ile %100 doldur
+        // Force CSS to fill parent
         canvas.style.width = "100%";
         canvas.style.height = "100%";
 
@@ -62,71 +50,76 @@ document.addEventListener("DOMContentLoaded", function () {
         bookElement.appendChild(div);
       }
 
-      loadingBar.style.display = "none";
-      initFlipBook();
-      isLoaded = true;
+      // PDF Loaded, Hide Spinner & Init Flip
+      loadingState.style.display = "none";
+      createFlipBook();
+
     } catch (err) {
-      console.error(err);
-      loadingBar.innerHTML = "<p style='color:#fff'>Error loading PDF.</p>";
+      console.error("Error loading catalog:", err);
+      loadingState.innerHTML = "<p style='color:#e74c3c'>Failed to load catalog.<br>Please try downloading the PDF instead.</p>";
     }
   }
 
-  // --- KİTAP BOYUTLANDIRMA (MAGIC FORMULA) ---
-  function initFlipBook() {
-    const isMobile = window.innerWidth < 768;
+  function createFlipBook() {
+    const isMobile = window.innerWidth < 992; // Tablet/Mobile treated as single page
 
-    // Ekranın kullanılabilir alanını al (Toolbarlar hariç)
-    // Üst(60) + Alt(40) = 100px. Biz güvenli pay olarak 120px düşelim.
-    const availH = window.innerHeight - 120;
-    const availW = window.innerWidth - (isMobile ? 20 : 100);
+    // Dynamic Sizing Calculation
+    // We want the book to fit nicely in the view minus header/footer/padding
+    const headerOffset = 100; // Approx header height
+    const paddingOffset = 140; // Controls + margins
+    const availableHeight = window.innerHeight - headerOffset - paddingOffset;
+    
+    // Standard A4 aspect ratio (1 / 1.414 = ~0.707)
+    const aspectRatio = 0.707; 
 
-    // PDF A4 Oranı (0.707)
-    const aspectRatio = 0.707;
+    // Calculate height based on screen, maxing out at reasonable limits
+    let bookHeight = Math.min(Math.max(availableHeight, 400), 800);
+    let bookWidth = bookHeight * aspectRatio;
 
-    // Yükseklik = Mevcut alanın %90'ı (Taşmayı önlemek için kritik hamle)
-    let bookH = availH * 0.95;
-    let bookW = bookH * aspectRatio;
-
-    // Genişlik kontrolü (Ekrana sığmıyorsa küçült)
-    if (!isMobile) {
-      // Masaüstü (Çift Sayfa)
-      if (bookW * 2 > availW) {
-        bookW = (availW / 2) * 0.95; // Genişliğe göre ayarla
-        bookH = bookW / aspectRatio;
-      }
-    } else {
-      // Mobil (Tek Sayfa)
-      if (bookW > availW) {
-        bookW = availW * 0.95;
-        bookH = bookW / aspectRatio;
-      }
+    // Mobile adjustment
+    if (isMobile) {
+        // Use width as constraint on mobile
+        const screenW = window.innerWidth - 40;
+        if (bookWidth > screenW) {
+            bookWidth = screenW;
+            bookHeight = bookWidth / aspectRatio;
+        }
     }
 
     pageFlip = new St.PageFlip(bookElement, {
-      width: bookW,
-      height: bookH,
+      width: bookWidth,
+      height: bookHeight,
+      
+      // Auto-size configuration
       size: isMobile ? "fixed" : "stretch",
-      minWidth: 200,
-      maxWidth: 2500,
-      minHeight: 300,
-      maxHeight: 2500,
+      
+      // Display Mode
+      usePortrait: isMobile, // Single page on mobile
       showCover: true,
+      
+      minWidth: 200,
+      maxWidth: 1000,
+      minHeight: 300,
+      maxHeight: 1200,
+      
       maxShadowOpacity: 0.5,
-      usePortrait: isMobile ? true : false,
-      mobileScrollSupport: false,
+      mobileScrollSupport: false // Prevent page scroll conflict
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll(".page-wrapper"));
 
-    // Kontroller
-    prevBtn.onclick = () => pageFlip.flipPrev();
-    nextBtn.onclick = () => pageFlip.flipNext();
+    // Event Listeners
+    prevBtn.addEventListener("click", () => pageFlip.flipPrev());
+    nextBtn.addEventListener("click", () => pageFlip.flipNext());
 
+    // Update Counter
     pageFlip.on("flip", (e) => {
-      const current = e.data + 1;
+      const current = e.data + 1; // 0-based index
       const total = pageFlip.getPageCount();
-      // Basit sayfa gösterimi
       pageCounter.innerText = `Page ${current} of ${total}`;
     });
+    
+    // Set initial counter
+    pageCounter.innerText = `Page 1 of ${pageFlip.getPageCount()}`;
   }
 });
