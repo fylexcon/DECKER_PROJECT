@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us | DECKER</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/contact.css" />
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <section class="contact-hero">
+    <div class="contact-hero-content">
+      <h1>Get in Touch</h1>
+      <p>We are here to help with your next project.</p>
+    </div>
+  </section>
+
+  <section class="section-padding" style="background-color: #f9f9f9;">
+    <div class="container">
+      <div class="contact-wrapper">
+        
+        <div class="contact-info-col">
+          <h3>Contact Information</h3>
+          
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="info-text">
+              <h5>Our Location</h5>
+              <p>123 Decker Blvd, Suite 100<br>Miami, Florida 33101</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+            <div class="info-text">
+              <h5>Phone Number</h5>
+              <a href="tel:+13054133603">+1 305 413 36 03</a>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-envelope"></i></div>
+            <div class="info-text">
+              <h5>Email Address</h5>
+              <a href="mailto:decker@deck-er.us">decker@deck-er.us</a>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon"><i class="fas fa-clock"></i></div>
+            <div class="info-text">
+              <h5>Working Hours</h5>
+              <p>Mon - Fri: 09:00 - 18:00<br>Sat - Sun: Closed</p>
+            </div>
+          </div>
+
+          <div class="map-container">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114964.53925916665!2d-80.29949920266738!3d25.782390733064336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88d9b0a20ec8c111%3A0xff96f271ddad4f65!2sMiami%2C%20FL%2C%20USA!5e0!3m2!1sen!2str!4v1633023222543!5m2!1sen!2str" 
+              allowfullscreen="" loading="lazy"></iframe>
+          </div>
+        </div>
+
+        <div class="contact-form-col">
+          <h3 style="color: var(--primary-color); margin-bottom: 20px;">Send a Message</h3>
+          
+          <form id="contactForm" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
+            
+            <div class="form-group">
+              <label class="form-label">Full Name *</label>
+              <input type="text" class="form-control" required placeholder="Your Name">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Email Address *</label>
+              <input type="email" class="form-control" required placeholder="your@email.com">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" class="form-control" placeholder="+1 (555) 000-0000">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">I am a... *</label>
+              <select class="form-control" required>
+                <option value="" disabled selected></option>
+                <option value="Home Owner">Home Owner</option>
+                <option value="Builder">Builder</option>
+                <option value="Architect">Architect</option>
+                <option value="Interior/Exterior Designer">Interior/Exterior Designer</option>
+                <option value="Distributor/Retailer">Distributor / Retailer</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label">Message *</label>
+              <textarea class="form-control" required placeholder="How can we help you?"></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Send Message <i class="fas fa-paper-plane" style="margin-left:8px;"></i></button>
+          
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>
