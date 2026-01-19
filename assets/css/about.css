@@ -1,22 +1,21 @@
-/* --- assets/css/about.css (SYLVANIX STYLE) --- */
+/* --- assets/css/about.css --- */
 
 /* 1. ABOUT HERO */
 .about-hero {
-  /* Arka plan: Çok hafif gri veya hafif bir görsel */
-  background: linear-gradient(
-      rgba(255, 255, 255, 0.9),
-      rgba(255, 255, 255, 0.9)
-    ),
-    url("https://images.unsplash.com/photo-1493663284031-b7e3aefcae8e?auto=format&fit=crop&w=1920&q=80");
+  /* Arka plan görselini kendi görselinle değiştir */
+  background:
+    linear-gradient(rgba(23, 32, 42, 0.8), rgba(23, 32, 42, 0.8)),
+    url("../images/about.jpg");
   background-size: cover;
   background-position: center;
-  padding: 120px 0 100px;
+  padding: 140px 0 100px;
   text-align: center;
+  color: #fff;
 }
 
 .hero-subtitle {
   display: block;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--accent-color);
   letter-spacing: 2px;
@@ -26,61 +25,53 @@
 
 .about-hero h1 {
   font-size: 3.5rem;
-  color: var(--primary-color);
+  color: #fff;
   margin-bottom: 25px;
-  font-weight: 300; /* Daha ince, zarif başlık */
+  font-weight: 700;
   line-height: 1.2;
 }
 
 .hero-desc {
-  font-size: 1.25rem;
-  color: #555;
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
   max-width: 700px;
   margin: 0 auto;
   line-height: 1.8;
   font-weight: 300;
 }
 
-/* 2. STORY SECTION (Split) */
+/* 2. STORY SECTION */
 .about-story {
   background: var(--white);
   padding: 100px 0;
 }
-
 .story-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 80px;
   align-items: center;
 }
-
 .story-content h2 {
   font-size: 2.5rem;
   margin-bottom: 25px;
-  font-weight: 600;
   line-height: 1.2;
 }
-
 .story-content p {
   margin-bottom: 20px;
   font-size: 1.05rem;
   color: #666;
   line-height: 1.7;
 }
-
 .story-image {
   position: relative;
 }
-
 .story-image img {
   width: 100%;
-  border-radius: 4px;
+  border-radius: 8px;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
   position: relative;
   z-index: 2;
 }
-
-/* Dekoratif Şekil */
 .image-shape {
   position: absolute;
   top: -20px;
@@ -89,53 +80,129 @@
   height: 100%;
   border: 2px solid var(--accent-color);
   z-index: 1;
-  border-radius: 4px;
+  border-radius: 8px;
 }
 
-/* 3. VALUES SECTION */
+/* 3. PRODUCTION HUBS (YENİ FABRİKA BÖLÜMÜ) */
+.production-hubs {
+  padding: 100px 0;
+  background-color: #f9f9f9;
+}
+.hubs-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  margin-top: 50px;
+}
+
+.hub-col {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s;
+}
+.hub-col:hover {
+  transform: translateY(-10px);
+}
+
+.hub-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 15px;
+}
+.hub-flag {
+  height: 30px;
+  width: auto;
+} /* Logo veya bayrak */
+.hub-header h3 {
+  font-size: 1.4rem;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.hub-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.hub-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+}
+.hub-item img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.hub-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Etiket (Label) */
+.hub-label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* 4. VALUES SECTION */
 .values-section {
-  background: #f9f9f9;
+  background: var(--white);
   padding: 100px 0;
 }
-
-.values-header {
-  text-align: center;
-  margin-bottom: 60px;
+.values-intro {
+  max-width: 800px;
+  margin: 0 auto 60px;
 }
-
-.values-header h2 {
+.values-intro h2 {
   font-size: 2.5rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
-.values-header p {
-  font-size: 1.1rem;
-  color: #777;
+.values-intro .large-text {
+  font-size: 1.3rem;
+  color: #555;
+  font-style: italic;
 }
 
 .values-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
+  margin-bottom: 60px;
 }
-
 .value-card {
-  background: var(--white);
+  background: #fff;
   padding: 40px 30px;
   border-radius: 8px;
   text-align: center;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+  border: 1px solid #eee;
   transition: transform 0.3s ease;
 }
-
 .value-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+  border-color: var(--accent-color);
 }
-
 .icon-box {
   width: 70px;
   height: 70px;
-  background: rgba(192, 57, 43, 0.1); /* Accent color opacity */
+  background: rgba(192, 57, 43, 0.1);
   color: var(--accent-color);
   font-size: 1.8rem;
   border-radius: 50%;
@@ -144,25 +211,54 @@
   justify-content: center;
   margin: 0 auto 20px;
 }
-
 .value-card h3 {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   margin-bottom: 15px;
 }
-
 .value-card p {
   font-size: 0.95rem;
   color: #666;
   line-height: 1.6;
 }
 
-/* 4. STATS SECTION */
-.stats-section {
+/* Vizyon Kutusu */
+.vision-box {
   background: var(--primary-color);
+  color: #fff;
+  padding: 50px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+.vision-box::before {
+  content: '"';
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  font-size: 10rem;
+  opacity: 0.1;
+  font-family: serif;
+}
+.vision-box h3 {
+  color: #fff;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+.vision-box p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  opacity: 0.9;
+}
+
+/* 5. STATS SECTION */
+.stats-section {
+  background: var(--accent-color);
   padding: 80px 0;
   color: var(--white);
 }
-
 .stats-wrapper {
   display: flex;
   justify-content: space-between;
@@ -170,39 +266,33 @@
   flex-wrap: wrap;
   gap: 30px;
 }
-
 .stat-item h3 {
   font-size: 3.5rem;
   color: var(--white);
   margin-bottom: 5px;
-  font-weight: 700;
+  font-weight: 800;
 }
-
 .stat-item span {
   font-size: 1rem;
-  color: rgba(255, 255, 255, 0.7);
+  color: rgba(255, 255, 255, 0.8);
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
 /* RESPONSIVE */
 @media (max-width: 992px) {
-  .about-hero h1 {
-    font-size: 2.5rem;
-  }
-  .story-grid {
-    grid-template-columns: 1fr;
-  }
-  .story-image {
-    margin-top: 40px;
-  }
+  .story-grid,
+  .hubs-wrapper,
   .values-grid {
     grid-template-columns: 1fr;
+  }
+  .hub-item img {
+    height: 200px;
   }
   .stats-wrapper {
     justify-content: center;
   }
   .stat-item {
     flex: 1 1 45%;
-  } /* Mobilde 2'li olsun */
+  }
 }
