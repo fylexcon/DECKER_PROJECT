@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultra Professional PDF Flipbook</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/turn.js/3/turn.min.js"></script>
+
+<style>
+:root{
+    --bg:#020617;
+    --panel:#020617e6;
+    --accent:#38bdf8;
+    --text:#e5e7eb;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+    background:radial-gradient(circle at top,#1e293b,#020617);
+    overflow:hidden;
+    font-family:system-ui,-apple-system,Segoe UI,Roboto;
+    color:var(--text);
+}
+
+/* ===== LAYOUT ===== */
+.viewer{width:100%;height:100vh;display:flex;align-items:center;justify-content:center}
+#flipbook{box-shadow:0 40px 120px rgba(0,0,0,.7)}
+.page{background:#fff;overflow:hidden;position:relative}
+.page-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center;transform-origin:center center;will-change:transform}
+.page canvas{max-width:100%;max-height:100%;pointer-events:none}
+.textLayer{position:absolute;inset:0}
+
+/* ===== UI ===== */
+.controls{
+    position:fixed;
+    bottom:22px;
+    left:50%;
+    transform:translateX(-50%);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:14px 20px;
+    background:var(--panel);
+    backdrop-filter:blur(12px);
+    border-radius:999px;
+    z-index:1000;
+}
+.controls button{
+    width:42px;height:42px;border-radius:50%;
+    border:none;background:#0f172a;color:var(--text);
+    cursor:pointer;font-size:18px;transition:.2s
+}
+.controls button:hover{background:#1e293b}
+.controls button:active{transform:scale(.9)}
+.zoom-range{width:140px}
+.zoom-label{min-width:52px;font-size:13px;text-align:center}
+
+/* ===== THUMBNAILS ===== */
+.thumbs{
+    position:fixed;
+    left:20px;
+    top:50%;
+    transform:translateY(-50%);
+    width:110px;
+    max-height:80vh;
+    overflow:auto;
+    background:var(--panel);
+    border-radius:16px;
+    padding:10px;
+}
+.thumb{
+    width:90px;height:120px;
+    margin-bottom:10px;
+    cursor:pointer;
+    border:2px solid transparent;
+}
+.thumb.active{border-color:var(--accent)}
+
+/* ===== SEARCH ===== */
+.search{
+    position:fixed;
+    top:20px;
+    right:20px;
+    display:flex;
+    gap:6px;
+}
+.search input{
+    padding:8px 10px;
+    border-radius:8px;
+    border:none;
+}
+.search button{
+    padding:8px 10px;
+    border-radius:8px;
+    border:none;
+    cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="search">
+    <input type="text" id="searchInput" placeholder="PDF içinde ara">
+    <button id="searchBtn">🔍</button>
+</div>
+
+<div class="thumbs" id="thumbs"></div>
+
+<div class="viewer">
+    <div id="flipbook"></div>
+</div>
+
+<div class="controls">
+    <button id="first">⟨⟨</button>
+    <button id="prev">◄</button>
+
+    <button id="zoomOut">−</button>
+    <input type="range" id="zoomRange" class="zoom-range"
+           min="0.6" max="3" step="0.05" value="1">
+    <button id="zoomIn">+</button>
+    <div class="zoom-label" id="zoomLabel">100%</div>
+
+    <button id="next">►</button>
+    <button id="last">⟩⟩</button>
+</div>
+
+<script>
+/* ================= CONFIG ================= */
+const PDF_URL = "../assets/documents/DECK-ER CATOLOG.pdf";
+const PDF_SCALE = 1.4;
+/* ========================================= */
+
+let pdfDoc, zoom=1, offsetX=0, offsetY=0;
+let rendered=new Set();
+
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
+async function loadPDF(){
+    pdfDoc = await pdfjsLib.getDocument(PDF_URL).promise;
+
+    for(let i=1;i<=pdfDoc.numPages;i++){
+        $('#flipbook').append(`<div class="page" id="p${i}"></div>`);
+        $('#thumbs').append(`<canvas class="thumb" data-p="${i}"></canvas>`);
+    }
+
+    initFlipbook();
+    renderAround(1);
+    renderThumbs();
+}
+
+function initFlipbook(){
+    const w=innerWidth<768?innerWidth-20:900;
+    const h=innerWidth<768?w*1.4:600;
+
+    $('#flipbook').turn({
+        width:w,height:h,pages:pdfDoc.numPages,
+        autoCenter:true,gradients:false,
+        when:{
+            turning:(e,p)=>renderAround(p)
+        }
+    });
+}
+
+async function renderPage(n){
+    if(n<1||n>pdfDoc.numPages||rendered.has(n))return;
+    rendered.add(n);
+
+    const page=await pdfDoc.getPage(n);
+    const vp=page.getViewport({scale:PDF_SCALE});
+    const canvas=document.createElement('canvas');
+    canvas.width=vp.width;canvas.height=vp.height;
+
+    await page.render({canvasContext:canvas.getContext('2d'),viewport:vp}).promise;
+
+    const inner=document.createElement('div');
+    inner.className='page-inner';
+    inner.appendChild(canvas);
+
+    $('#p'+n).html(inner);
+    applyTransform();
+    enablePan(inner);
+}
+
+function renderAround(p){
+    for(let i=p-3;i<=p+3;i++)renderPage(i);
+}
+
+async function renderThumbs(){
+    for(let i=1;i<=pdfDoc.numPages;i++){
+        const page=await pdfDoc.getPage(i);
+        const vp=page.getViewport({scale:.25});
+        const c=document.querySelector(`.thumb[data-p="${i}"]`);
+        c.width=vp.width;c.height=vp.height;
+        await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;
+        c.onclick=()=>$('#flipbook').turn('page',i);
+    }
+}
+
+/* ===== ZOOM & PAN ===== */
+function applyTransform(){
+    $('.page-inner').css('transform',
+        `translate3d(${offsetX}px,${offsetY}px,0) scale(${zoom})`);
+    $('#zoomLabel').text(Math.round(zoom*100)+'%');
+    $('#zoomRange').val(zoom);
+}
+$('#zoomIn').click(()=>{zoom=Math.min(zoom+.1,3);resetOffset();});
+$('#zoomOut').click(()=>{zoom=Math.max(zoom-.1,.6);resetOffset();});
+$('#zoomRange').on('input',e=>{zoom=e.target.value;resetOffset();});
+$('#flipbook').on('dblclick',()=>{zoom=1;resetOffset();});
+
+function resetOffset(){offsetX=offsetY=0;applyTransform();}
+
+function enablePan(el){
+    let drag=false,sx,sy;
+    el.onmousedown=e=>{drag=true;sx=e.clientX-offsetX;sy=e.clientY-offsetY};
+    window.onmousemove=e=>{
+        if(!drag)return;
+        offsetX=e.clientX-sx;
+        offsetY=e.clientY-sy;
+        applyTransform();
+    };
+    window.onmouseup=()=>drag=false;
+}
+
+/* ===== NAV ===== */
+$('#prev').click(()=>$('#flipbook').turn('previous'));
+$('#next').click(()=>$('#flipbook').turn('next'));
+$('#first').click(()=>$('#flipbook').turn('page',1));
+$('#last').click(()=>$('#flipbook').turn('page',pdfDoc.numPages));
+
+/* ===== SEARCH (basic) ===== */
+$('#searchBtn').click(async()=>{
+    const q=$('#searchInput').val();
+    if(!q)return;
+    for(let i=1;i<=pdfDoc.numPages;i++){
+        const t=await (await pdfDoc.getPage(i)).getTextContent();
+        if(t.items.some(x=>x.str.toLowerCase().includes(q.toLowerCase()))){
+            $('#flipbook').turn('page',i);
+            break;
+        }
+    }
+});
+
+loadPDF();
+</script>
+
+</body>
+</html>
