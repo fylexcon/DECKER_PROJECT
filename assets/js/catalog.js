@@ -1,4 +1,4 @@
-/* --- assets/js/catalog.js --- */
+/* --- assets/js/catalog.js (MAXIMIZED) --- */
 
 document.addEventListener("DOMContentLoaded", function () {
   const bookElement = document.getElementById("book");
@@ -7,28 +7,30 @@ document.addEventListener("DOMContentLoaded", function () {
   const prevBtn = document.getElementById("btnPrev");
   const nextBtn = document.getElementById("btnNext");
 
+  // Zoom Elements
+  const zoomInBtn = document.getElementById("btnZoomIn");
+  const zoomOutBtn = document.getElementById("btnZoomOut");
+  let currentZoom = 1;
+
   let pageFlip = null;
   let pdfDoc = null;
 
-  // 1. Start Loading Immediately
+  // Başlat
   initCatalog();
 
   async function initCatalog() {
     try {
-      // PDF Path (Ensure this matches your file structure exactly)
-      // Note: Kept the filename typo "CATOLOG" as per your file list
       const pdfPath = "../assets/documents/DECK-ER CATOLOG.pdf";
-
       const loadingTask = pdfjsLib.getDocument(pdfPath);
       pdfDoc = await loadingTask.promise;
       const numPages = pdfDoc.numPages;
 
-      // Higher scale for crisp text
+      // HIZLI AÇILMASI İÇİN OPTİMİZE EDİLMİŞ SCALE
+      // Mobilde 1.5, Masaüstünde 2.0 (Yüksek kalite ama kasmayan seviye)
       const scale = window.innerWidth < 768 ? 1.5 : 2.0;
 
-      bookElement.innerHTML = ""; // Clear container
+      bookElement.innerHTML = "";
 
-      // Render all pages to Canvas
       for (let i = 1; i <= numPages; i++) {
         const page = await pdfDoc.getPage(i);
         const viewport = page.getViewport({ scale: scale });
@@ -38,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
         canvas.width = viewport.width;
         canvas.height = viewport.height;
 
-        // Force CSS to fill parent
+        // CSS: %100 doldur
         canvas.style.width = "100%";
         canvas.style.height = "100%";
 
@@ -50,76 +52,89 @@ document.addEventListener("DOMContentLoaded", function () {
         bookElement.appendChild(div);
       }
 
-      // PDF Loaded, Hide Spinner & Init Flip
       loadingState.style.display = "none";
       createFlipBook();
-
     } catch (err) {
-      console.error("Error loading catalog:", err);
-      loadingState.innerHTML = "<p style='color:#e74c3c'>Failed to load catalog.<br>Please try downloading the PDF instead.</p>";
+      console.error(err);
+      loadingState.innerHTML = "<p style='color:red'>Error loading PDF.</p>";
     }
   }
 
   function createFlipBook() {
-    const isMobile = window.innerWidth < 992; // Tablet/Mobile treated as single page
+    const isMobile = window.innerWidth < 768;
 
-    // Dynamic Sizing Calculation
-    // We want the book to fit nicely in the view minus header/footer/padding
-    const headerOffset = 100; // Approx header height
-    const paddingOffset = 140; // Controls + margins
-    const availableHeight = window.innerHeight - headerOffset - paddingOffset;
-    
-    // Standard A4 aspect ratio (1 / 1.414 = ~0.707)
-    const aspectRatio = 0.707; 
+    // --- AKILLI BOYUTLANDIRMA ---
+    // Ekranın kullanılabilir alanını al.
+    // 60px TopBar + 50px BottomBar + 20px Padding = 130px
+    const availH = window.innerHeight - 130;
+    const availW = window.innerWidth - (isMobile ? 20 : 100); // Yan oklara pay
 
-    // Calculate height based on screen, maxing out at reasonable limits
-    let bookHeight = Math.min(Math.max(availableHeight, 400), 800);
-    let bookWidth = bookHeight * aspectRatio;
+    const aspectRatio = 0.707; // A4 Oranı
 
-    // Mobile adjustment
-    if (isMobile) {
-        // Use width as constraint on mobile
-        const screenW = window.innerWidth - 40;
-        if (bookWidth > screenW) {
-            bookWidth = screenW;
-            bookHeight = bookWidth / aspectRatio;
-        }
+    // Yükseklik = Mevcut alanın tamamı
+    let bookH = availH;
+    let bookW = bookH * aspectRatio;
+
+    // Eğer genişlik ekrana sığmıyorsa, genişliğe göre küçült
+    if (!isMobile) {
+      // Masaüstü (Çift Sayfa)
+      if (bookW * 2 > availW) {
+        bookW = availW / 2;
+        bookH = bookW / aspectRatio;
+      }
+    } else {
+      // Mobil (Tek Sayfa)
+      if (bookW > availW) {
+        bookW = availW;
+        bookH = bookW / aspectRatio;
+      }
     }
 
     pageFlip = new St.PageFlip(bookElement, {
-      width: bookWidth,
-      height: bookHeight,
-      
-      // Auto-size configuration
+      width: bookW,
+      height: bookH,
       size: isMobile ? "fixed" : "stretch",
-      
-      // Display Mode
-      usePortrait: isMobile, // Single page on mobile
-      showCover: true,
-      
       minWidth: 200,
-      maxWidth: 1000,
+      maxWidth: 3000,
       minHeight: 300,
-      maxHeight: 1200,
-      
+      maxHeight: 3000,
+      showCover: true,
       maxShadowOpacity: 0.5,
-      mobileScrollSupport: false // Prevent page scroll conflict
+      usePortrait: isMobile ? true : false,
+      mobileScrollSupport: false,
     });
 
     pageFlip.loadFromHTML(document.querySelectorAll(".page-wrapper"));
 
-    // Event Listeners
+    // Kontroller
     prevBtn.addEventListener("click", () => pageFlip.flipPrev());
     nextBtn.addEventListener("click", () => pageFlip.flipNext());
 
-    // Update Counter
     pageFlip.on("flip", (e) => {
-      const current = e.data + 1; // 0-based index
+      const current = e.data + 1;
       const total = pageFlip.getPageCount();
-      pageCounter.innerText = `Page ${current} of ${total}`;
+      pageCounter.innerText = `${current} / ${total}`;
     });
-    
-    // Set initial counter
-    pageCounter.innerText = `Page 1 of ${pageFlip.getPageCount()}`;
+
+    // Zoom Mantığı
+    zoomInBtn.addEventListener("click", () => {
+      if (currentZoom < 2) {
+        currentZoom += 0.2;
+        bookElement.style.transform = `scale(${currentZoom})`;
+      }
+    });
+
+    zoomOutBtn.addEventListener("click", () => {
+      if (currentZoom > 0.6) {
+        currentZoom -= 0.2;
+        bookElement.style.transform = `scale(${currentZoom})`;
+      }
+    });
   }
+
+  // Ekran boyutu değişirse sayfayı yenile (Boyutları sıfırdan hesaplasın)
+  window.addEventListener("resize", () => {
+    // Performans için debounce eklenebilir ama basitçe:
+    location.reload();
+  });
 });
