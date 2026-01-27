@@ -1,4 +1,4 @@
-/* --- assets/js/catalog.js (MAXIMIZED) --- */
+/* --- assets/js/catalog.js (PROGRESSIVE RENDERING & SPEED OPTIMIZED) --- */
 
 document.addEventListener("DOMContentLoaded", function () {
   const bookElement = document.getElementById("book");
@@ -10,10 +10,12 @@ document.addEventListener("DOMContentLoaded", function () {
   // Zoom Elements
   const zoomInBtn = document.getElementById("btnZoomIn");
   const zoomOutBtn = document.getElementById("btnZoomOut");
-  let currentZoom = 1;
+  let currentZoom = 0.8;
+  const zoomFactor = 0.85;
 
   let pageFlip = null;
   let pdfDoc = null;
+  let canvasContexts = []; // Canvas referanslarını tutacağız
 
   // Başlat
   initCatalog();
@@ -25,79 +27,123 @@ document.addEventListener("DOMContentLoaded", function () {
       pdfDoc = await loadingTask.promise;
       const numPages = pdfDoc.numPages;
 
-      // HIZLI AÇILMASI İÇİN OPTİMİZE EDİLMİŞ SCALE
-      // Mobilde 1.5, Masaüstünde 2.0 (Yüksek kalite ama kasmayan seviye)
-      const scale = window.innerWidth < 768 ? 1.5 : 2.0;
-
+      // HTML İSKELETİNİ OLUŞTUR (BOŞ SAYFALAR)
       bookElement.innerHTML = "";
 
       for (let i = 1; i <= numPages; i++) {
-        const page = await pdfDoc.getPage(i);
-        const viewport = page.getViewport({ scale: scale });
-
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        canvas.width = viewport.width;
-        canvas.height = viewport.height;
-
-        // CSS: %100 doldur
-        canvas.style.width = "100%";
-        canvas.style.height = "100%";
-
-        await page.render({ canvasContext: ctx, viewport: viewport }).promise;
-
         const div = document.createElement("div");
         div.classList.add("page-wrapper");
-        div.appendChild(canvas);
+
+        // Yükleniyor ikonu (Sayfa henüz render olmadıysa görünür)
+        div.innerHTML = `
+          <div class="page-loader">
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </div>
+          <canvas id="page-canvas-${i}" class="page-canvas"></canvas>
+        `;
+
         bookElement.appendChild(div);
       }
 
-      loadingState.style.display = "none";
+      // KİTABI HEMEN BAŞLAT (Henüz boş ama olsun)
       createFlipBook();
+      zoomOutBtn.click(); // Başlangıç zoom
+
+      // --- AKILLI YÜKLEME STRATEJİSİ ---
+      // 1. Önce sadece ilk 5 sayfayı yükle (Kapak + Giriş)
+      // Böylece kullanıcı hemen kitabı görür.
+      const priorityCount = 5;
+
+      for (let i = 1; i <= Math.min(numPages, priorityCount); i++) {
+        await renderPage(i);
+      }
+
+      // 2. Yükleme ekranını hemen gizle!
+      loadingState.style.display = "none";
+
+      // 3. Geri kalan sayfaları arkada sessizce yükle
+      if (numPages > priorityCount) {
+        renderRemainingPages(priorityCount + 1, numPages);
+      }
     } catch (err) {
       console.error(err);
       loadingState.innerHTML = "<p style='color:red'>Error loading PDF.</p>";
     }
   }
 
+  // --- TEK SAYFA RENDER FONKSİYONU ---
+  async function renderPage(pageNum) {
+    try {
+      const page = await pdfDoc.getPage(pageNum);
+
+      // Mobilde 1.5, PC'de 2.0 (Hız/Kalite Dengesi)
+      const scale = window.innerWidth < 768 ? 1.5 : 2.0;
+      const viewport = page.getViewport({ scale: scale });
+
+      const canvas = document.getElementById(`page-canvas-${pageNum}`);
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = viewport.width;
+      canvas.height = viewport.height;
+
+      // Render işlemi
+      await page.render({ canvasContext: ctx, viewport: viewport }).promise;
+
+      // Yükleme ikonunu gizle, canvas'ı göster
+      canvas.style.opacity = "1";
+      const loader = canvas.parentElement.querySelector(".page-loader");
+      if (loader) loader.style.display = "none";
+    } catch (error) {
+      console.error(`Page ${pageNum} render error:`, error);
+    }
+  }
+
+  // --- ARKA PLAN YÜKLEME ---
+  async function renderRemainingPages(start, end) {
+    for (let i = start; i <= end; i++) {
+      // UI donmasın diye her sayfada 50ms nefes aldır
+      await new Promise((resolve) => setTimeout(resolve, 50));
+      await renderPage(i);
+    }
+  }
+
   function createFlipBook() {
     const isMobile = window.innerWidth < 768;
 
-    // --- AKILLI BOYUTLANDIRMA ---
-    // Ekranın kullanılabilir alanını al.
-    // 60px TopBar + 50px BottomBar + 20px Padding = 130px
-    const availH = window.innerHeight - 130;
-    const availW = window.innerWidth - (isMobile ? 20 : 100); // Yan oklara pay
+    // Alan Hesaplama
+    const container = document.querySelector(".viewer-body"); // Kapsayıcıyı al
+    // Eğer container henüz oluşmadıysa window kullan
+    const availW = container
+      ? container.clientWidth - (isMobile ? 20 : 100)
+      : window.innerWidth;
+    const availH = container ? container.clientHeight - 20 : window.innerHeight;
 
-    const aspectRatio = 0.707; // A4 Oranı
+    const aspectRatio = 0.707; // A4
 
-    // Yükseklik = Mevcut alanın tamamı
     let bookH = availH;
     let bookW = bookH * aspectRatio;
 
-    // Eğer genişlik ekrana sığmıyorsa, genişliğe göre küçült
     if (!isMobile) {
-      // Masaüstü (Çift Sayfa)
       if (bookW * 2 > availW) {
         bookW = availW / 2;
         bookH = bookW / aspectRatio;
       }
     } else {
-      // Mobil (Tek Sayfa)
       if (bookW > availW) {
         bookW = availW;
         bookH = bookW / aspectRatio;
       }
     }
 
+    // FlipBook Ayarları
     pageFlip = new St.PageFlip(bookElement, {
       width: bookW,
       height: bookH,
       size: isMobile ? "fixed" : "stretch",
-      minWidth: 200,
+      minWidth: 100,
       maxWidth: 3000,
-      minHeight: 300,
-      maxHeight: 3000,
+      minHeight: 100,
+      maxHeight: 2000,
       showCover: true,
       maxShadowOpacity: 0.5,
       usePortrait: isMobile ? true : false,
@@ -107,16 +153,18 @@ document.addEventListener("DOMContentLoaded", function () {
     pageFlip.loadFromHTML(document.querySelectorAll(".page-wrapper"));
 
     // Kontroller
-    prevBtn.addEventListener("click", () => pageFlip.flipPrev());
-    nextBtn.addEventListener("click", () => pageFlip.flipNext());
+    prevBtn.onclick = () => pageFlip.flipPrev();
+    nextBtn.onclick = () => pageFlip.flipNext();
 
+    // Sayfa Sayacı
     pageFlip.on("flip", (e) => {
       const current = e.data + 1;
       const total = pageFlip.getPageCount();
-      pageCounter.innerText = `${current} / ${total}`;
+      if (current === 1) pageCounter.innerText = `Cover / ${total}`;
+      else pageCounter.innerText = `Page ${current} of ${total}`;
     });
 
-    // Zoom Mantığı
+    // Zoom
     zoomInBtn.addEventListener("click", () => {
       if (currentZoom < 2) {
         currentZoom += 0.2;
@@ -132,9 +180,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Ekran boyutu değişirse sayfayı yenile (Boyutları sıfırdan hesaplasın)
+  // Resize
   window.addEventListener("resize", () => {
-    // Performans için debounce eklenebilir ama basitçe:
-    location.reload();
+    // Performans için sadece sayfa yenileme yapmıyoruz,
+    // CSS flex yapısı zaten çoğu şeyi hallediyor.
+    // Çok büyük değişimlerde (yatay/dikey çevirme) reload gerekebilir.
   });
 });

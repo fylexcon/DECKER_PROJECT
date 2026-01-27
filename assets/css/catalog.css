@@ -192,3 +192,75 @@ html {
     display: none;
   } /* Mobilde başlığı gizle yer aç */
 }
+/* --- assets/css/catalog.css (SPEED TWEAKS) --- */
+
+/* Mevcut kodlarının üzerine veya yerine bunları ekle */
+
+/* Sayfa Wrapper */
+.page-wrapper {
+  background-color: #fff; /* Kağıt rengi */
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.05); /* Kağıt dokusu hissi */
+}
+
+/* Sayfa Yükleniyor İkonu (Her sayfanın ortasında) */
+.page-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ddd;
+  font-size: 2rem;
+  z-index: 1;
+}
+
+/* Canvas (Sayfa İçeriği) */
+.page-canvas {
+  opacity: 0; /* Başlangıçta görünmez */
+  transition: opacity 0.5s ease-in; /* Yüklenince yumuşakça belirsin */
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- DİĞER CSS KODLARI AYNEN KALABİLİR (FULLSCREEN OLANLAR) --- */
+/* (Aşağıdaki temel yapı öncekiyle aynı, sadece hatırlatma) */
+
+.catalog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  background: #1a1a1a;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.catalog-overlay.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.viewer-body {
+  flex-grow: 1;
+  width: 100%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  padding: 10px;
+}
+
+/* Diğer stil dosyalarındaki .catalog-showcase vb. aynen kalsın */
