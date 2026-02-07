@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News & Events | DECKER</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+  <link rel="stylesheet" href="../assets/css/style.css" />
+  <link rel="stylesheet" href="../assets/css/all-news.css" />
+</head>
+<body>
+
+  <div id="header-placeholder"></div>
+
+  <section class="news-hero">
+    <div class="news-hero-content">
+      <h1>Latest News</h1>
+      <p>Updates on our global expansion, fairs, and investments.</p>
+    </div>
+  </section>
+
+  <section class="news-section">
+    <div class="container">
+      
+      <div class="vertical-grid" id="newsGrid">
+
+        <a href="news-mersin.html" class="news-card-vertical news-item">
+          <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=600&q=80" class="nc-bg" alt="Factory Construction">
+          <div class="nc-overlay"></div>
+          <div class="nc-action-btn"><i class="fas fa-arrow-right"></i></div>
+          <div class="nc-content">
+            <span class="nc-date">February 2025</span>
+            <h3 class="nc-title">Kırıkhan OSB: 63,000m² Factory Investment Underway</h3>
+          </div>
+        </a>
+
+        <a href="news-mersin.html" class="news-card-vertical news-item">
+          <img src="https://deck-er.us/storage/images/reports/content/c61f1ea6-7c3a-45a8-8ea9-4a232dd18b00.jpg" class="nc-bg" alt="Mersin Hub">
+          <div class="nc-overlay"></div>
+          <div class="nc-action-btn"><i class="fas fa-arrow-right"></i></div>
+          <div class="nc-content">
+            <span class="nc-date">March 15, 2025</span>
+            <h3 class="nc-title">Decker Arrives in Mersin: Gateway to the Mediterranean</h3>
+          </div>
+        </a>
+
+        <a href="#" class="news-card-vertical news-item">
+          <img src="../assets/images/get_inspired/35.jpg" class="nc-bg" alt="Algeria Fair">
+          <div class="nc-overlay"></div>
+          <div class="nc-action-btn"><i class="fas fa-arrow-right"></i></div>
+          <div class="nc-content">
+            <span class="nc-date">December 2024</span>
+            <h3 class="nc-title">Algeria Woodtech Fair: Showcasing Innovation in North Africa</h3>
+          </div>
+        </a>
+
+        <a href="#" class="news-card-vertical news-item">
+          <img src="../assets/images/get_inspired/2.jpg" class="nc-bg" alt="Eurasia Door Fair">
+          <div class="nc-overlay"></div>
+          <div class="nc-action-btn"><i class="fas fa-arrow-right"></i></div>
+          <div class="nc-content">
+            <span class="nc-date">November 2024</span>
+            <h3 class="nc-title">Eurasia Door Fair: Meeting Global Partners in Istanbul</h3>
+          </div>
+        </a>
+
+        <a href="#" class="news-card-vertical news-item">
+          <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?auto=format&fit=crop&w=600&q=80" class="nc-bg" alt="Abidjan Ambassador">
+          <div class="nc-overlay"></div>
+          <div class="nc-action-btn"><i class="fas fa-arrow-right"></i></div>
+          <div class="nc-content">
+            <span class="nc-date">January 2025</span>
+            <h3 class="nc-title">Abidjan Ambassador Visits Our Ivory Coast Warehouse</h3>
+          </div>
+        </a>
+
+        <a href="#" class="news-card-vertical news-item">
+          <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=600&q=80" class="nc-bg" alt="Turkeybuild">
+          <div class="nc-overlay"></div>
+          <div class="nc-action-btn"><i class="fas fa-arrow-right"></i></div>
+          <div class="nc-content">
+            <span class="nc-date">April 2024</span>
+            <h3 class="nc-title">Turkeybuild Istanbul: A Successful Exhibition</h3>
+          </div>
+        </a>
+
+      </div>
+
+      <div class="load-more-container">
+        <button id="loadMoreBtn" class="btn-load-more">Load More</button>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="../assets/js/main.js"></script>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const newsItems = document.querySelectorAll('.news-item');
+      const loadMoreBtn = document.getElementById('loadMoreBtn');
+      
+      // Configuration
+      const itemsPerPage = 3;
+      let visibleCount = itemsPerPage;
+
+      // 1. Initially Hide items beyond the first 3
+      newsItems.forEach((item, index) => {
+        if (index >= itemsPerPage) {
+          item.classList.add('hidden');
+        }
+      });
+
+      // 2. Hide Button if total items <= itemsPerPage
+      if (newsItems.length <= itemsPerPage) {
+        loadMoreBtn.style.display = 'none';
+      }
+
+      // 3. Button Click Event
+      loadMoreBtn.addEventListener('click', function() {
+        let newCount = 0;
+        
+        // Loop through and reveal the next batch
+        for (let i = 0; i < newsItems.length; i++) {
+          if (newsItems[i].classList.contains('hidden')) {
+            newsItems[i].classList.remove('hidden');
+            newCount++;
+            visibleCount++;
+            
+            // Stop after revealing the batch size (3)
+            if (newCount >= itemsPerPage) break;
+          }
+        }
+
+        // Hide button if all items are now visible
+        if (visibleCount >= newsItems.length) {
+          loadMoreBtn.style.display = 'none';
+        }
+      });
+    });
+  </script>
+</body>
+</html>

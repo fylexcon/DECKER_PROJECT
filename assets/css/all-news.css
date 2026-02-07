@@ -1,0 +1,205 @@
+/* --- assets/css/all-news.css --- */
+
+/* 1. HERO SECTION */
+.news-hero {
+  height: 40vh;
+  min-height: 300px;
+  background: #111;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  margin-top: -100px; /* Pull behind fixed header */
+  padding-top: 100px;
+}
+
+.news-hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  /* Use a generic dark background or specific image */
+  background: url('../images/get_inspired/35.jpg') center/cover no-repeat;
+  opacity: 0.4;
+  z-index: 1;
+}
+
+.news-hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+  padding: 0 20px;
+}
+
+.news-hero h1 {
+  font-size: 3rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.news-hero p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+}
+
+/* 2. NEWS GRID CONTAINER */
+.news-section {
+  padding: 80px 0;
+  background-color: #f9f9f9;
+}
+
+.vertical-grid {
+  display: grid;
+  /* Creates responsive columns that are at least 300px wide */
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+/* 3. VERTICAL NEWS CARD (3:4 Ratio) */
+.news-card-vertical {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4; /* Forces the Tall Rectangle shape */
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  background: #000;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card-vertical:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+/* Background Image */
+.nc-bg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  opacity: 0.95;
+}
+
+.news-card-vertical:hover .nc-bg {
+  transform: scale(1.08); /* Zoom effect */
+}
+
+/* Gradient Overlay (Bottom) */
+.nc-overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  /* Gradient starts dark at bottom for text readability */
+  background: linear-gradient(to top, rgba(0,0,0,0.9) 10%, rgba(0,0,0,0.4) 50%, rgba(0,0,0,0) 100%);
+  z-index: 2;
+}
+
+/* Content Positioning */
+.nc-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 30px;
+  z-index: 3;
+  color: #fff;
+}
+
+.nc-date {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #e0e0e0;
+  margin-bottom: 8px;
+  display: block;
+  letter-spacing: 1px;
+}
+
+.nc-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin: 0;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Red Arrow Button (Top Right) */
+.nc-action-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 45px;
+  height: 45px;
+  background-color: var(--accent-color); /* Your Red Color */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  transition: all 0.3s ease;
+}
+
+.nc-action-btn i {
+  font-size: 1rem;
+  transform: rotate(-45deg); /* Arrow pointing diagonal up */
+  transition: transform 0.3s;
+}
+
+.news-card-vertical:hover .nc-action-btn {
+  background-color: #fff;
+  color: var(--accent-color);
+}
+
+.news-card-vertical:hover .nc-action-btn i {
+  transform: rotate(0deg); /* Straight arrow on hover */
+}
+
+.news-item.hidden {
+  display: none;
+}
+
+/* LOAD MORE BUTTON CONTAINER */
+.load-more-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.btn-load-more {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: 2px solid var(--primary-color);
+  padding: 15px 40px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.btn-load-more:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .news-hero { height: 30vh; }
+  .news-hero h1 { font-size: 2.2rem; }
+  
+  /* Slightly smaller cards on mobile if needed */
+  .vertical-grid {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+  }
+}

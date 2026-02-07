@@ -1,9 +1,7 @@
 /* --- assets/css/news.css --- */
 
-/* HABER DETAY BAŞLIĞI (HERO) */
+/* 1. ARTICLE HEADER (Static Hero) */
 .news-header {
-  /* Arka plan görseli */
-  background-image: url("https://images.unsplash.com/photo-1610366398516-46da9dec5931?auto=format&fit=crop&w=1920&q=80");
   height: 400px;
   background-size: cover;
   background-position: center;
@@ -12,18 +10,17 @@
   justify-content: center;
   position: relative;
   text-align: center;
-  color: var(--white);
+  color: #fff;
+  margin-top: -100px; /* Pull behind fixed nav */
+  padding-top: 100px;
 }
 
-/* Karartma Katmanı */
 .news-header::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6); /* Yazının okunması için karanlık filtre */
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0, 0, 0, 0.6);
   z-index: 1;
 }
 
@@ -35,7 +32,9 @@
 .news-header h1 {
   font-size: 3rem;
   margin-bottom: 15px;
-  color: var(--white);
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
 }
 
 .news-meta {
@@ -43,14 +42,19 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: #ddd;
+  color: var(--accent-color);
   display: block;
-  margin-bottom: 10px;
+  background: rgba(255,255,255,0.1);
+  padding: 5px 15px;
+  border-radius: 20px;
+  display: inline-block;
+  margin-bottom: 15px;
+  backdrop-filter: blur(5px);
 }
 
-/* İÇERİK METNİ DÜZENİ */
+/* 2. ARTICLE CONTENT */
 .news-content-text {
-  max-width: 800px; /* Okuma kolaylığı için daraltılmış */
+  max-width: 900px;
   margin: 0 auto;
   font-size: 1.1rem;
   line-height: 1.8;
@@ -61,13 +65,14 @@
   margin-bottom: 25px;
 }
 
-/* Vurgulu Giriş Paragrafı */
-.news-content-text p.lead {
+/* Lead Paragraph Style */
+.news-content-text .lead {
   font-size: 1.25rem;
   font-weight: 500;
   color: var(--primary-color);
   border-left: 4px solid var(--accent-color);
   padding-left: 20px;
+  margin-bottom: 30px;
 }
 
 .news-content-text h3 {
@@ -75,53 +80,103 @@
   margin-top: 40px;
   margin-bottom: 20px;
   color: var(--primary-color);
+  font-weight: 800;
 }
 
 .news-content-text ul {
-  list-style: none; /* Varsayılan noktaları kaldır */
+  list-style: none;
   padding-left: 0;
   margin-bottom: 30px;
 }
 
 .news-content-text li {
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   position: relative;
   padding-left: 25px;
 }
 
-/* Liste maddelerine özel ikon */
 .news-content-text li::before {
-  content: "\f00c"; /* FontAwesome check ikonu */
-  font-family: "Font Awesome 5 Free";
+  content: "\f00c"; /* FontAwesome Check */
+  font-family: "Font Awesome 6 Free";
   font-weight: 900;
   color: var(--accent-color);
   position: absolute;
   left: 0;
-  top: 2px;
+  top: 4px;
 }
 
-.news-featured-img {
+/* 3. DUAL SLIDER (In-Content Carousel) */
+.dual-slider-wrapper {
+  position: relative;
   width: 100%;
+  margin: 50px 0; /* Space above and below slider */
+  overflow: hidden;
+}
+
+.dual-slider-track {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+  width: 100%;
+}
+
+.dual-slide {
+  /* Default: 2 slides visible (50% each) */
+  min-width: 50%; 
+  box-sizing: border-box;
+  padding: 0 10px; /* Gap between images */
+}
+
+.dual-slide img {
+  width: 100%;
+  height: 400px; /* Uniform height */
+  object-fit: cover;
   border-radius: 8px;
-  margin: 40px 0;
-  box-shadow: var(--shadow-md);
+  display: block;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s;
 }
 
-/* Link Stili */
-.news-content-text a {
-  color: var(--accent-color);
-  font-weight: 700;
-  text-decoration: underline;
+.dual-slide img:hover {
+  transform: scale(1.02);
 }
-.news-content-text a:hover {
+
+/* Slider Controls */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45px;
+  height: 45px;
+  background: rgba(255, 255, 255, 0.9);
   color: var(--primary-color);
+  border: 1px solid #eee;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
+.slider-arrow:hover {
+  background: var(--accent-color);
+  color: #fff;
+  border-color: var(--accent-color);
+}
+
+.arrow-prev { left: 20px; }
+.arrow-next { right: 20px; }
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .news-header {
-    height: 300px;
-  }
-  .news-header h1 {
-    font-size: 2rem;
-  }
+  .news-header { height: 300px; }
+  .news-header h1 { font-size: 2rem; }
+  
+  /* Show 1 slide on mobile */
+  .dual-slide { min-width: 100%; }
+  .dual-slide img { height: 300px; }
+  .arrow-prev { left: 10px; }
+  .arrow-next { right: 10px; }
 }
